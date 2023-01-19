@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+    <title>조달데이터허브 - 공통</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../image/header/favicon.ico">
+
+    <link rel="stylesheet" href="../css/pdh-base.css">
+    <link rel="stylesheet" href="../css/pdh-cont.css">
+    <link rel="stylesheet" href="../css/daterangepicker.css" />
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../css/jquery.scrollbar.css">
+
+    <script src="../js/jquery-3.4.2.min.js"></script>
+    <script src="../js/jquery.throttle-debounce.min.js"></script>
+
+    <script src="../js/moment.min.js"></script>
+    <script src="../js/daterangepicker.js"></script>
+    <script src="../js/swiper-bundle.min.js"></script>
+    <script src="../js/jquery.scrollbar.js"></script>
+    <script src="../js/pdh-base.js"></script>
+    <script src="../js/pdh-cont.js"></script>
+    <script>
+        $(document).ready(function(){
+            fnSlide({ dom: '.slide_aaa', loop: true, auto: false});
+            fnSlide({ dom: '.slide_bbb', loop: true, auto: true, breakPoint: ['t', 'm']});
+            fnSlide({ dom: '.slide_ccc', loop: true, auto: true});
+            // afterHasCheck('.aaa', domRatio, true, (3/4))
+            // afterHasCheck('.bbb', domRatio, true, (9/16));
+            $('.al01').click(function(){
+                layerAlert({
+                    th: this, tit: '알림', cont: `<p class="fs_16 fw_500 fc_222 ta_c">스팸메일함을 비우시겠습니까?</p><p class="fs_12 fc_666 ta_c mg_t8">스팸메일함의 모든 메일은 휴지통으로 이동합니다.</p>`, pf: function(){console.log('bbb')}
+                });
+            });
+            $('.al02').click(function(){
+                layerAlert({
+                    th: this, cont: `<p class="fs_16 fw_500 fc_222 ta_c">스팸메일함을 비우시겠습니까?</p><p class="fs_12 fc_666 ta_c mg_t8">스팸메일함의 모든 메일은 휴지통으로 이동합니다.</p>`, cf: function(){console.log('bbb')}
+                });
+            });
+            tabCommon('.tab-testa');
+            tabAccess('.tab-testb');
+            fnSlide({ dom: '.tab_in_slide_slidea', loop: true, auto: false, effect: 'fade'});
+            fnSlide({ dom: '.tab_in_slide_slideb', loop: true, auto: false, effect: 'fade'});
+            $('input[name="daterange"]').daterangepicker({
+                
+                locale: {
+                    "separator": " ~ ",
+                    "format": 'YYYY-MM-DD HH:mm:ss',
+                    "applyLabel": "확인",
+                    "cancelLabel": "취소",
+                    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+                    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"] 
+                },
+                timePicker: true,
+                showDropdowns: true,
+                autoApply: true,
+                timePicker24Hour: true,
+                timePickerSeconds: true,
+                // singleDatePicker: true,
+                opens: 'right'
+            }, function(start, end, label) {
+                // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
+            // $('input[name="daterange"]').on('show.daterangepicker', function(a, b){console.log(a, b)})
+            // $('input[name="daterange"]').on('hide.daterangepicker', function(a, b){console.log(a, b)})
+            // $('input[name="daterange"]').on('showCalendar.daterangepicker', function(a, b){console.log(a, b)})
+            // $('input[name="daterange"]').on('hideCalendar.daterangepicker', function(a, b){console.log(a, b)})
+            // $('#dr01').on('apply.daterangepicker', function(a, b){console.log(a, b)})
+            // $('#dr02').on('cancel.daterangepicker', function(a, b){console.log(a, b)})
+        });
+    </script>
+
+    <style>
+        .scrollbar-test {background:#f8f8f8;}
+        .scrollbar-test > div {max-height:240px;}
+    </style>
+
+    <script src="../js/marked.min.js"></script>
+
+    <style>
+        .marked_parse_box {padding:28px 32px; border-radius:16px; background:#eee; font-size:14px; line-height:22px; color:#222; margin-top:32px;}
+        .marked_parse_box code {padding:0; margin:0;}
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            var target = $('.marked_test');
+            target.each(function(){
+                var targetHtml = $(this).html();
+                $(this).after(`<div class="marked_parse_box">${marked.parse(targetHtml)}</div>`);
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <!-- <div class="loading"><div></div></div> -->
+    <div style="max-width:1180px; margin:0 auto; padding-bottom:128px;">
+        <input type="text" name="daterange" id="dr01" />
+        <input type="text" name="daterange" id="dr02" />
+        <div class="datalist_box cl_b_aftr">
+            <div class="db_l lt_p open">
+                <a href="" class="lt_l">1</a>
+                <div class="lt_c">2</div>
+            </div>
+            <div class="db_r">3</div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">font size</h1>
+        <div class="marked_test">
+    <span class="fs_10">fs_10</span>
+    <span class="fs_12">fs_12</span>
+    <span class="fs_14">fs_14</span>
+    <span class="fs_16">fs_16</span>
+    <span class="fs_18">fs_18</span>
+    <span class="fs_20">fs_20</span>
+    <span class="fs_22">fs_22</span>
+    <span class="fs_24">fs_24</span>
+    <span class="fs_26">fs_26</span>
+    <span class="fs_28">fs_28</span>
+    <span class="fs_30">fs_30</span>
+    <span class="fs_32">fs_32</span>
+    <span class="fs_34">fs_34</span>
+    <span class="fs_36">fs_36</span>
+    <span class="fs_38">fs_38</span>
+    <span class="fs_40">fs_40</span></div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">font color</h1>
+        <div class="marked_test fs_16">
+    <span class="fc_000">fc_000</span>
+    <span class="fc_111">fc_111</span>
+    <span class="fc_222">fc_222</span>
+    <span class="fc_333">fc_333</span>
+    <span class="fc_444">fc_444</span>
+    <span class="fc_555">fc_555</span>
+    <span class="fc_666">fc_666</span>
+    <span class="fc_777">fc_777</span>
+    <span class="fc_888">fc_888</span>
+    <span class="fc_999">fc_999</span>
+    <span class="fc_aaa">fc_aaa</span>
+    <span class="fc_bbb">fc_bbb</span>
+    <span class="fc_ccc">fc_ccc</span>
+    <span class="fc_ddd">fc_ddd</span>
+    <span class="fc_eee">fc_eee</span>
+    <span class="fc_fff">fc_fff</span>
+    <span class="fc_red">fc_red</span>
+    <span class="fc_skyred ">fc_skyred </span>
+    <span class="fc_orange">fc_orange</span>
+    <span class="fc_skyorange ">fc_skyorange </span>
+    <span class="fc_yellow">fc_yellow</span>
+    <span class="fc_skygreen">fc_skygreen</span>
+    <span class="fc_green">fc_green</span>
+    <span class="fc_darkgreen ">fc_darkgreen </span>
+    <span class="fc_skyblue">fc_skyblue</span>
+    <span class="fc_blue">fc_blue</span>
+    <span class="fc_navy">fc_navy</span>
+    <span class="fc_skypurple ">fc_skypurple </span>
+    <span class="fc_purple">fc_purple	</span>
+    <span class="fc_darkpurple">fc_darkpurple</span>
+    <span class="fc_gradient_">fc_gradient_</span></div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">font weight</h1>
+        <div class="fs_16">
+            <span class="fw_b">fw_b</span>
+            <span class="fw_100 ">fw_100 </span>
+            <span class="fw_200 ">fw_200 </span>
+            <span class="fw_300 ">fw_300 </span>
+            <span class="fw_400 ">fw_400 </span>
+            <span class="fw_500 ">fw_500 </span>
+            <span class="fw_600 ">fw_600 </span>
+            <span class="fw_700 ">fw_700 </span>
+            <span class="fw_800 ">fw_800 </span>
+            <span class="fw_900 ">fw_900 </span>
+        </div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">link text</h1>
+        <div class="fs_16">
+            <a class="link_text" target="_blank">link_text(target="_blank")</a>
+            <a class="link_text01">link_text01</a>
+            <a class="link_text02" target="_blank">link_text02(target="_blank")</a>
+        </div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">article top</h1>
+        <div class="article_top cl_b_aftr dlr_va_m">
+            <div class="fl_l">
+                <h4 class="title_22">서브타이틀</h4>
+                <h4 class="title_20">서브타이틀</h4>
+                <h4 class="title_18">서브타이틀</h4>
+                <h4 class="title_16">서브타이틀</h4>
+                <p class="fs_16 fw_500">총 <em class="fc_red">345345</em>건</p>
+                <p class="fs_14 fw_500">총 <em class="fc_red">345345</em>건</p>
+                <p class="fs_14 fc_888">부연설명</p>
+            </div>
+            <div class="fl_r">
+                <div class="form_xs">
+                    <select class="w_a">
+                        <option selected="selected" value="0" disabled>선택하세요.</option>
+                        <optgroup label="옵션 타이틀">
+                            <option value="2">Option 1</option>
+                            <option value="3">Option 2</option>
+                            <option value="4">Option 3</option>
+                          </optgroup>
+                    </select>
+                    <input class="w_a" type="text" name="" id="">
+                    <a href="" class="btn btn_xs btn_line_gray"><span>검색</span></a>
+                    <select class="w_a" name="" id=""><option value="">10개씩 보기</option></select>
+                    <input class="w_a" type="text" name="" id="">
+                    <div class="f_srch dp_ib"><input type="text" name="" id=""><a href="" class="btn btn_xs"><i class="ico_search"></i></a></div>
+                </div>
+                <p class="fs_14 fc_888 at_essential_">부연설명</p>
+                <a href="" class="btn_more_ vd_va_m_a"><span>더보기</span></a>
+            </div>
+        </div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">title</h1>
+        <h4 class="title_24">서브타이틀 title_24 데이터개방</h4>
+        <h4 class="title_22">서브타이틀 title_22</h4>
+        <h4 class="title_20">서브타이틀 title_20</h4>
+        <h4 class="title_18">서브타이틀 title_18</h4>
+        <h4 class="title_16">서브타이틀 title_16</h4>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">descript</h1>
+        <h4 class="descript_16">일반문장 부연설명 descript_16 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_15">일반문장 부연설명 descript_15</h4>
+        <h4 class="descript_14">일반문장 부연설명 descript_14 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_13">일반문장 부연설명 descript_13</h4>
+        <h4 class="descript_12">일반문장 부연설명 descript_12 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_ico_caution descript_16">일반문장 부연설명 descript_16 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_ico_caution descript_15">일반문장 부연설명 descript_15</h4>
+        <h4 class="descript_ico_caution descript_14">일반문장 부연설명 descript_14 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_ico_caution descript_13">일반문장 부연설명 descript_13</h4>
+        <h4 class="descript_ico_caution descript_12">일반문장 부연설명 descript_12 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_ico_guide descript_16">일반문장 부연설명 descript_16 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_ico_guide descript_15">일반문장 부연설명 descript_15</h4>
+        <h4 class="descript_ico_guide descript_14">일반문장 부연설명 descript_14 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+        <h4 class="descript_ico_guide descript_13">일반문장 부연설명 descript_13</h4>
+        <h4 class="descript_ico_guide descript_12">일반문장 부연설명 descript_12 <a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></h4>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">list</h1>
+        <ul class="list_14">
+            <li><i class="l_dot"></i>세금계산서는 주문건별로 발행되며 과세/면세 각 1장씩 발행 됩니다.(*과세: 음반, DVD, Gift, 분철비용 / 면세: 도서)</li>
+            <li><i class="l_bar"></i>세금계산서는 상품 발송일로부터 익월 7일까지만 신청 되며, 상품이 모두 발송된 이후에 신청내역이 조회됩니다.</li>
+            <li><i class="l_txt">가.</i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt">83</i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_13">
+            <li><i class="l_dot"></i>세금계산서는 주문건별로 발행되며 과세/면세 각 1장씩 발행 됩니다.(*과세: 음반, DVD, Gift, 분철비용 / 면세: 도서)</li>
+            <li><i class="l_bar"></i>세금계산서는 상품 발송일로부터 익월 7일까지만 신청 되며, 상품이 모두 발송된 이후에 신청내역이 조회됩니다.</li>
+            <li><i class="l_txt">가.</i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)</li>
+            <li><i class="l_txt">83</i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12">
+            <li><i class="l_dot"></i>세금계산서는 주문건별로 발행되며 과세/면세 각 1장씩 발행 됩니다.(*과세: 음반, DVD, Gift, 분철비용 / 면세: 도서)</li>
+            <li><i class="l_bar"></i>세금계산서는 상품 발송일로부터 익월 7일까지만 신청 되며, 상품이 모두 발송된 이후에 신청내역이 조회됩니다.</li>
+            <li><i class="l_txt">가.</i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt">74</i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12 list_num">
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12 list_loweralpha">
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12 list_upperalpha">
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12 list_consonant">
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12 list_korean">
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12 list_circlenum">
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)</li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)</li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <ul class="list_12 list_circlealpha">
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            <li><i class="l_txt"></i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)<a href="" class="btn btn_xx btn_gray"><span>다운로드</span></a><a href="" class="btn btn_xs btn_gray"><span>다운로드</span></a></li>
+            <li><i class="l_txt"></i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+        </ul>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">txt elps </h1>
+        <div class="fs_16 mg_t16 txt_elps_01">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_02">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_03">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_04">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_05">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_06">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_07">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_08">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <div class="fs_16 mg_t16 txt_elps_09">asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">badge</h1>
+        <div>
+            <i class="badge badge_xs badge_green"><span>배지</span></i>
+            <i class="badge badge_sm badge_green"><span>배지</span></i>
+            <i class="badge badge_md badge_green"><span>배지</span></i>
+            <i class="badge badge_lg badge_green"><span>배지</span></i>
+            <i class="badge badge_xs badge_green badge_square"><span>배지</span></i>
+            <i class="badge badge_sm badge_green badge_square"><span>배지</span></i>
+            <i class="badge badge_md badge_green badge_square"><span>배지</span></i>
+            <i class="badge badge_lg badge_green badge_square"><span>배지</span></i>
+            <i class="badge badge_xs badge_line_gray"><span>배지</span></i>
+            <i class="badge badge_sm badge_line_gray"><span>배지</span></i>
+            <i class="badge badge_md badge_line_gray"><span>배지</span></i>
+            <i class="badge badge_lg badge_line_gray"><span>배지</span></i>
+            <i class="badge badge_xs badge_line_gray badge_square"><span>배지</span></i>
+            <i class="badge badge_sm badge_line_gray badge_square"><span>배지</span></i>
+            <i class="badge badge_md badge_line_gray badge_square"><span>배지</span></i>
+            <i class="badge badge_lg badge_line_gray badge_square"><span>배지</span></i>
+        </div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">btn : button</h1>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">Size</h2>
+        <div>
+            <a href="" class="btn btn_xx btn_gray"><span>버튼</span></a>
+            <a href="" class="btn btn_xs btn_gray"><span>버튼</span></a>
+            <a href="" class="btn btn_sm btn_gray"><span>버튼</span></a>
+            <a href="" class="btn btn_md btn_gray"><span>버튼</span></a>
+            <a href="" class="btn btn_lg btn_gray"><span>버튼</span></a>
+            <a href="" class="btn btn_xx btn_gray btn_round"><span>버튼</span></a>
+            <a href="" class="btn btn_xs btn_gray btn_round"><span>버튼</span></a>
+            <a href="" class="btn btn_sm btn_gray btn_round"><span>버튼</span></a>
+            <a href="" class="btn btn_md btn_gray btn_round"><span>버튼</span></a>
+            <a href="" class="btn btn_lg btn_gray btn_round"><span>버튼</span></a>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">Icon Only</h2>
+        <div>
+            <a href="" class="btn btn_xx btn_gray"><i class="ico_"></i></a>
+            <a href="" class="btn btn_xs btn_gray"><i class="ico_"></i></a>
+            <a href="" class="btn btn_sm btn_gray"><i class="ico_"></i></a>
+            <a href="" class="btn btn_md btn_gray"><i class="ico_"></i></a>
+            <a href="" class="btn btn_lg btn_gray"><i class="ico_"></i></a>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">Icon Left</h2>
+        <div>
+            <a href="" class="btn btn_xx btn_gray"><i class="ico_"></i><span>버튼</span></a>
+            <a href="" class="btn btn_xs btn_gray"><i class="ico_"></i><span>버튼</span></a>
+            <a href="" class="btn btn_sm btn_gray"><i class="ico_"></i><span>버튼</span></a>
+            <a href="" class="btn btn_md btn_gray"><i class="ico_"></i><span>버튼</span></a>
+            <a href="" class="btn btn_lg btn_gray"><i class="ico_"></i><span>버튼</span></a>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">Icon Right</h2>
+        <div>
+            <a href="" class="btn btn_xx btn_gray"><span>버튼</span><i class="ico_"></i></a>
+            <a href="" class="btn btn_xs btn_gray"><span>버튼</span><i class="ico_"></i></a>
+            <a href="" class="btn btn_sm btn_gray"><span>버튼</span><i class="ico_"></i></a>
+            <a href="" class="btn btn_md btn_gray"><span>버튼</span><i class="ico_"></i></a>
+            <a href="" class="btn btn_lg btn_gray"><span>버튼</span><i class="ico_"></i></a>
+        </div>
+        <h1 style="font-size:24px; line-height:32px; font-weight:700; padding:32px 0 16px 0;">icon example</h1>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_arrowright</span><i class="ico_arrowright"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_arrowright</span><i class="ico_arrowright"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_arrowright</span><i class="ico_arrowright"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_arrowright</span><i class="ico_arrowright"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_arrowright</span><i class="ico_arrowright"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_arrowright</span><i class="ico_arrowright"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_arrowright</span><i class="ico_arrowright"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_search</span><i class="ico_search"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_search</span><i class="ico_search"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_search</span><i class="ico_search"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_search</span><i class="ico_search"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_search</span><i class="ico_search"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_search</span><i class="ico_search"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_search</span><i class="ico_search"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_calendar</span><i class="ico_calendar"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_calendar</span><i class="ico_calendar"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_calendar</span><i class="ico_calendar"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_calendar</span><i class="ico_calendar"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_calendar</span><i class="ico_calendar"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_calendar</span><i class="ico_calendar"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_calendar</span><i class="ico_calendar"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_download</span><i class="ico_download"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_download</span><i class="ico_download"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_download</span><i class="ico_download"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_download</span><i class="ico_download"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_download</span><i class="ico_download"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_download</span><i class="ico_download"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_download</span><i class="ico_download"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_blank</span><i class="ico_blank"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_blank</span><i class="ico_blank"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_blank</span><i class="ico_blank"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_blank</span><i class="ico_blank"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_blank</span><i class="ico_blank"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_blank</span><i class="ico_blank"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_blank</span><i class="ico_blank"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_folderopen</span><i class="ico_folderopen"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_folderopen</span><i class="ico_folderopen"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_folderopen</span><i class="ico_folderopen"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_folderopen</span><i class="ico_folderopen"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_folderopen</span><i class="ico_folderopen"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_folderopen</span><i class="ico_folderopen"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_folderopen</span><i class="ico_folderopen"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_delete</span><i class="ico_delete"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_delete</span><i class="ico_delete"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_delete</span><i class="ico_delete"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_delete</span><i class="ico_delete"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_delete</span><i class="ico_delete"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_delete</span><i class="ico_delete"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_delete</span><i class="ico_delete"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_cancel</span><i class="ico_cancel"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_cancel</span><i class="ico_cancel"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_cancel</span><i class="ico_cancel"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_cancel</span><i class="ico_cancel"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_cancel</span><i class="ico_cancel"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_cancel</span><i class="ico_cancel"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_cancel</span><i class="ico_cancel"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_plus</span><i class="ico_plus"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_plus</span><i class="ico_plus"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_plus</span><i class="ico_plus"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_plus</span><i class="ico_plus"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_plus</span><i class="ico_plus"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_plus</span><i class="ico_plus"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_plus</span><i class="ico_plus"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_gradient"><span>btn_gradient + ico_minus</span><i class="ico_minus"></i></a>
+            <a href="" class="btn btn_sm btn_blue"><span>btn_blue + ico_minus</span><i class="ico_minus"></i></a>
+            <a href="" class="btn btn_sm btn_navy"><span>btn_navy + ico_minus</span><i class="ico_minus"></i></a>
+            <a href="" class="btn btn_sm btn_green"><span>btn_green + ico_minus</span><i class="ico_minus"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_minus</span><i class="ico_minus"></i></a>
+            <a href="" class="btn btn_sm btn_line_gray"><span>btn_line_gray + ico_minus</span><i class="ico_minus"></i></a>
+            <a href="" class="btn btn_sm btn_black"><span>btn_black + ico_minus</span><i class="ico_minus"></i></a>
+        </div>
+        <div class="mg_t8">
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_hwp</span><i class="ico_hwp"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_word</span><i class="ico_word"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_pdf</span><i class="ico_pdf"></i></a>
+            <a href="" class="btn btn_sm btn_line_black"><span>btn_line_black + ico_excel</span><i class="ico_excel"></i></a>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">form : form_xs form_sm form_md form_lg</h1>
+        <div>
+            <div class="f_check_btn"><input type="checkbox" name="" id="c111"><label for="c111" class="btn btn_xx btn_line_gray btn_round"><span>체크박스</span></label></div>
+            <div class="f_check_btn"><input type="checkbox" name="" id=""><label for="" class="btn btn_xs btn_line_gray btn_round"><span>체크박스</span></label></div>
+            <div class="f_check_btn"><input type="checkbox" name="" id=""><label for="" class="btn btn_sm btn_line_gray btn_round"><span>체크박스</span></label></div>
+            <div class="f_check_btn"><input type="checkbox" name="" id=""><label for="" class="btn btn_md btn_line_gray btn_round"><span>체크박스</span></label></div>
+            <div class="f_check_btn"><input type="checkbox" name="" id=""><label for="" class="btn btn_lg btn_line_gray btn_round"><span>체크박스</span></label></div>
+        </div>
+        <div>
+            <div class="f_radio_btn"><input type="radio" name="" id="r111"><label for="r111" class="btn btn_xx btn_line_gray btn_round"><span>라디오박스</span></label></div>
+            <div class="f_radio_btn"><input type="radio" name="" id=""><label for="" class="btn btn_xs btn_line_gray btn_round"><span>라디오박스</span></label></div>
+            <div class="f_radio_btn"><input type="radio" name="" id=""><label for="" class="btn btn_sm btn_line_gray btn_round"><span>라디오박스</span></label></div>
+            <div class="f_radio_btn"><input type="radio" name="" id=""><label for="" class="btn btn_md btn_line_gray btn_round"><span>라디오박스</span></label></div>
+            <div class="f_radio_btn"><input type="radio" name="" id=""><label for="" class="btn btn_lg btn_line_gray btn_round"><span>라디오박스</span></label></div>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">base</h2>
+        <div class="form_xs">
+            <input type="date">
+            <input type="datetime">
+            <input type="datetime-local">
+            <input type="email">
+            <input type="file">
+            <input type="month">
+            <input type="number">
+            <input type="password">
+            <input type="search">
+            <input type="tel">
+            <input type="text">
+            <input type="time">
+            <input type="url">
+            <input type="week">
+            <select><option>전체</option></select>
+            <textarea></textarea>
+        </div>
+        <div class="form_sm">
+            <input type="date">
+            <input type="datetime">
+            <input type="datetime-local">
+            <input type="email">
+            <input type="file">
+            <input type="month">
+            <input type="number">
+            <input type="password">
+            <input type="search">
+            <input type="tel">
+            <input type="text">
+            <input type="time">
+            <input type="url">
+            <input type="week">
+            <select><option>전체</option></select>
+            <textarea></textarea>
+        </div>
+        <div class="form_md">
+            <input type="date">
+            <input type="datetime">
+            <input type="datetime-local">
+            <input type="email">
+            <input type="file">
+            <input type="month">
+            <input type="number">
+            <input type="password">
+            <input type="search">
+            <input type="tel">
+            <input type="text">
+            <input type="time">
+            <input type="url">
+            <input type="week">
+            <select><option>전체</option></select>
+            <textarea></textarea>
+        </div>
+        <div class="form_lg">
+            <input type="date">
+            <input type="datetime">
+            <input type="datetime-local">
+            <input type="email">
+            <input type="file">
+            <input type="month">
+            <input type="number">
+            <input type="password">
+            <input type="search">
+            <input type="tel">
+            <input type="text">
+            <input type="time">
+            <input type="url">
+            <input type="week">
+            <select><option>전체</option></select>
+            <textarea></textarea>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">f_check, f_radio</h2>
+        <div class="form_xs"><div class="f_check"><input type="checkbox" name="" id="c01"><label for="c01" class="f_txt">체크박스</label></div></div>
+        <div class="form_sm"><div class="f_check"><input type="checkbox" name="" id="c02"><label for="c02" class="f_txt">체크박스</label></div></div>
+        <div class="form_md"><div class="f_check"><input type="checkbox" name="" id="c03"><label for="c03" class="f_txt">체크박스</label></div></div>
+        <div class="form_lg"><div class="f_check"><input type="checkbox" name="" id="c04"><label for="c04" class="f_txt">체크박스</label></div></div>
+        <div class="form_xs"><div class="f_radio"><input type="radio" name="" id="r01"><label for="r01" class="f_txt">체크박스</label></div></div>
+        <div class="form_sm"><div class="f_radio"><input type="radio" name="" id="r02"><label for="r02" class="f_txt">체크박스</label></div></div>
+        <div class="form_md"><div class="f_radio"><input type="radio" name="" id="r03"><label for="r03" class="f_txt">체크박스</label></div></div>
+        <div class="form_lg"><div class="f_radio"><input type="radio" name="" id="r04"><label for="r04" class="f_txt">체크박스</label></div></div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">f_check, f_radio - icon only</h2>
+        <div class="form_xs"><div class="f_check"><input type="checkbox" name="" id="c05"><label for="c05" class="f_txt"></label></div></div>
+        <div class="form_sm"><div class="f_check"><input type="checkbox" name="" id="c06"><label for="c06" class="f_txt"></label></div></div>
+        <div class="form_md"><div class="f_check"><input type="checkbox" name="" id="c07"><label for="c07" class="f_txt"></label></div></div>
+        <div class="form_lg"><div class="f_check"><input type="checkbox" name="" id="c08"><label for="c08" class="f_txt"></label></div></div>
+        <div class="form_xs"><div class="f_radio"><input type="radio" name="" id="r05"><label for="r05" class="f_txt"></label></div></div>
+        <div class="form_sm"><div class="f_radio"><input type="radio" name="" id="r06"><label for="r06" class="f_txt"></label></div></div>
+        <div class="form_md"><div class="f_radio"><input type="radio" name="" id="r07"><label for="r07" class="f_txt"></label></div></div>
+        <div class="form_lg"><div class="f_radio"><input type="radio" name="" id="r08"><label for="r08" class="f_txt"></label></div></div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">input + button</h2>
+        <div class="dp_tbl form_xs">
+            <div><input type="text"></div>
+            <div class="pd_l4 SDFG"><div class="ib_w"><a href="" class="btn btn_xs btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+            <div class="pd_l4 asfrgsrgSWER"><div class="ib_w"><a href="" class="btn btn_xs btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+        </div>
+        <div class="dp_tbl form_sm">
+            <div><input type="text"></div>
+            <div class="pd_l4"><div class="ib_w"><a href="" class="btn btn_sm btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+            <div class="pd_l4"><div class="ib_w"><a href="" class="btn btn_sm btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+        </div>
+        <div class="dp_tbl form_md">
+            <div><input type="text"></div>
+            <div class="pd_l4"><div class="ib_w"><a href="" class="btn btn_md btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+            <div class="pd_l4"><div class="ib_w"><a href="" class="btn btn_md btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+        </div>
+        <div class="dp_tbl form_lg">
+            <div><input type="text"></div>
+            <div class="pd_l4"><div class="ib_w"><a href="" class="btn btn_lg btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+            <div class="pd_l4"><div class="ib_w"><a href="" class="btn btn_lg btn_gray"><span>swrgwsergWSerg</span></a></div></div>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">f_srch</h2>
+        <div class="form_xs"><div class="f_srch"><input type="text"><a href="" class="btn btn_xs"><i class="ico_calendar"></i></a></div></div>
+        <div class="form_sm"><div class="f_srch"><input type="text"><a href="" class="btn btn_sm"><i class="ico_calendar"></i></a></div></div>
+        <div class="form_md"><div class="f_srch"><input type="text"><a href="" class="btn btn_md"><i class="ico_calendar"></i></a></div></div>
+        <div class="form_lg"><div class="f_srch"><input type="text"><a href="" class="btn btn_lg"><i class="ico_calendar"></i></a></div></div>
+        <div class="form_xs"><div class="f_srch"><input type="text"><a href="" class="btn btn_xs"><i class="ico_search"></i></a></div></div>
+        <div class="form_sm"><div class="f_srch"><input type="text"><a href="" class="btn btn_sm"><i class="ico_search"></i></a></div></div>
+        <div class="form_md"><div class="f_srch"><input type="text"><a href="" class="btn btn_md"><i class="ico_search"></i></a></div></div>
+        <div class="form_lg"><div class="f_srch"><input type="text"><a href="" class="btn btn_lg"><i class="ico_search"></i></a></div></div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">f_unit</h2>
+        <div class="form_xs"><div class="f_unit"><input type="text"><span class="f_txt">원</span></div></div>
+        <div class="form_sm"><div class="f_unit"><input type="text"><span class="f_txt">원wsrgwer</span></div></div>
+        <div class="form_md"><div class="f_unit"><input type="text"><span class="f_txt">원</span></div></div>
+        <div class="form_lg"><div class="f_unit"><input type="text"><span class="f_txt">원wrgwregwrg</span></div></div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">f_tbl_dash</h2>
+        <div class="form_xs dp_tbl"><div><input type="text"></div><div class="f_tbl_dash">-</div><div><input type="text"></div></div>
+        <div class="form_sm dp_tbl"><div><input type="text"></div><div class="f_tbl_dash">-</div><div><input type="text"></div></div>
+        <div class="form_md dp_tbl"><div><input type="text"></div><div class="f_tbl_dash">-</div><div><input type="text"></div></div>
+        <div class="form_lg dp_tbl"><div><input type="text"></div><div class="f_tbl_dash">-</div><div><input type="text"></div></div>
+
+        
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">scroll bar</h1>
+        <div class="scrollbar-test">
+            <div class="scrollbar-inner">
+                <div style="height:640px;">wargkujha.ersdlkfgjnlakersdg</div>
+            </div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">tab_common</h1>
+        <div class="tab-testa tab_common">
+            <div class="tab_list">
+                <ul>
+                    <li><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="tab_content">1</div>
+                <div class="tab_content">2</div>
+                <div class="tab_content">3</div>
+            </div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">tab_access</h1>
+        <div class="tab-testb tab_access">
+            <div class="tab_box">
+                <div class="tab_title"><a href="">1</a></div>
+                <div class="tab_content">
+
+                    <div class="s_o">
+                        <div class="tab_in_slide_slidea">
+                            <div class="s_w">
+                                <div class="sw_l">1</div>
+                                <div class="sw_l">2</div>
+                                <div class="sw_l">3</div>
+                            </div>
+                        </div>
+                        <div class="s_b">
+                            <a href="" class="btn_prev">이전</a>
+                            <a href="" class="btn_next">다음</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab_box">
+                <div class="tab_title"><a href="">2</a></div>
+                <div class="tab_content">
+
+                    <div class="s_o">
+                        <div class="tab_in_slide_slideb">
+                            <div class="s_w">
+                                <div class="sw_l">1</div>
+                                <div class="sw_l">2</div>
+                                <div class="sw_l">3</div>
+                            </div>
+                        </div>
+                        <div class="s_b">
+                            <a href="" class="btn_prev">이전</a>
+                            <a href="" class="btn_next">다음</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">paging</h1>
+        <div class="paging">
+            <a href="" class="p_first" title="처음"><span class="hdn">처음페이지</span></a>
+            <a href="" class="p_prev" title="이전"><span class="hdn">이전페이지</span></a>
+            <strong>1</strong>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="">4</a>
+            <a href="">5</a>
+            <a href="">6</a>
+            <a href="">7</a>
+            <a href="">8</a>
+            <a href="">9</a>
+            <a href="" class="p_next" title="다음"><span class="hdn">다음페이지</span></a>
+            <a href="" class="p_last" title="끝"><span class="hdn">끝페이지</span></a>
+        </div>
+
+        
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">list toggle - lt_ap lt_al lt_p lt_a lt_c</h1>
+        <div class="lt_ap">
+            <a href="" class="lt_al">모두</a>
+            <div class="lt_p">
+                <div class="lt_l">클릭</div>
+                <div class="lt_c">내용</div>
+            </div>
+            <div>
+                <div class="lt_p open">
+                    <div class="lt_l">클릭</div>
+                    <div class="lt_c">내용</div>
+                </div>
+            </div>
+        </div>
+        <div class="lt_ap open">
+            <a href="" class="lt_al">모두</a>
+            <div class="lt_p">
+                <div class="lt_l">클릭</div>
+                <div class="lt_c">내용</div>
+            </div>
+            <div>
+                <div class="lt_p">
+                    <div class="lt_l">클릭</div>
+                    <div class="lt_c">내용</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="body_shadow"></div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">tab_scrl : tab scroll</h1>
+        <div class="tab_scrl">
+            <div class="s_w">
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+            </div>
+        </div>
+        <div class="tab_scrl">
+            <div class="s_w">
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+                <div class="sw_l">엑셀파일 다운로드</div>
+            </div>
+        </div>
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">slide</h1>
+        <style>
+            .slide_aaa, .slide_bbb {width:100%; overflow:hidden; font-size:0; line-height:0;}
+            .slide_aaa > .s_w > .sw_l > a, .slide_bbb > .s_w > .sw_l > a {display:block; font-size:20px; line-height:28px; font-weight:bold;}
+            .slide_aaa > .s_w > .sw_l {width:100%;}
+            .slide_bbb > .s_w > .sw_l,
+            .slide_ddd > .in_s_w > .in_sw_l,
+            .slide_ccc > .s_w > .sw_l {width:33.3333%;}
+        </style>
+        <a href="#">이전링크</a>
+        <div class="s_o" data-id="01">
+            <div class="slide_aaa">
+                <div class="s_w">
+                    <div class="sw_l"><a href="#">1</a></div>
+                    <div class="sw_l"><a href="#">2</a></div>
+                    <div class="sw_l"><a href="#">3</a></div>
+                    <div class="sw_l"><a href="#">4</a></div>
+                    <div class="sw_l"><a href="#">5</a></div>
+                    <div class="sw_l"><a href="#">6</a></div>
+                    <div class="sw_l"><a href="#">7</a></div>
+                    <div class="sw_l"><a href="#">8</a></div>
+                    <div class="sw_l"><a href="#">9</a></div>
+                    <div class="sw_l"><a href="#">10</a></div>
+                </div>
+            </div>
+            <div class="s_c"><strong></strong><span></span></div>
+            <div class="s_p"></div>
+            <div class="s_b">
+                <a href="" class="btn_prev">prev</a>
+                <a href="" class="btn_pause">pause</a>
+                <a href="" class="btn_play">play</a>
+                <a href="" class="btn_next">next</a>
+            </div>
+            <div class="s_g"><i></i></div>
+        </div>
+        <a href="#">다음링크</a>
+        <a href="#">이전링크</a>
+        <div>
+            <div class="s_o" data-id="02">
+                <div class="slide_bbb">
+                    <div class="s_w">
+                        <div class="sw_l"><a href="#">1</a></div>
+                        <div class="sw_l"><a href="#">2</a></div>
+                        <div class="sw_l"><a href="#">3</a></div>
+                        <div class="sw_l"><a href="#">4</a></div>
+                        <div class="sw_l"><a href="#">8</a></div>
+                        <div class="sw_l"><a href="#">9</a></div>
+                        <div class="sw_l"><a href="#">10</a></div>
+                    </div>
+                </div>
+                <div class="s_c"><strong></strong><span></span></div>
+                <div class="s_p"></div>
+                <div class="s_b">
+                    <a href="" class="btn_prev">prev</a>
+                    <a href="" class="btn_pause">pause</a>
+                    <a href="" class="btn_play">play</a>
+                    <a href="" class="btn_next">next</a>
+                </div>
+            </div>
+        </div>
+        <a href="#">다음링크</a>
+        <div class="s_o" data-id="03">
+            <div class="slide_ccc">
+                <div class="s_w">
+                    <div class="sw_l">1</div>
+                    <div class="sw_l">1</div>
+                    <div class="sw_l">1</div>
+                    <div class="sw_l">1</div>
+                    <div class="sw_l">1</div>
+                    <div class="sw_l">1</div>
+                </div>
+            </div>
+            <div class="s_c"><strong></strong><span></span></div>
+            <div class="s_p"></div>
+            <div class="s_b">
+                <a href="" class="btn_prev">prev</a>
+                <a href="" class="btn_pause">pause</a>
+                <a href="" class="btn_play">play</a>
+                <a href="" class="btn_next">next</a>
+            </div>
+            <div class="s_g"><i></i></div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">dom ratio</h1>
+        <div class="domratio_11" style="background:red"></div>
+        <div class="domratio_12" style="background:orange"></div>
+        <div class="domratio_43" style="background:orangered"></div>
+        <div class="domratio_169" style="background:green"></div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">s_check : screen current status check</h1>
+        <div class="s_check">
+            <div class="sc_p dp_n_t dp_n_m"><span class="hdn">너비 1180px 이상</span></div>
+            <div class="sc_t dp_n_p dp_n_m"><span class="hdn">너비 768px - 1179px</span></div>
+            <div class="sc_m dp_n_p dp_n_t"><span class="hdn">너비 767px 이하</span></div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">data table</h1>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">data_table_14</h2>
+        <div class="data_table_14 mg_t16">
+            <table>
+                <colgroup>
+                    <col style="width:15%;">
+                    <col>
+                    <col style="width:15%;">
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>비고</th>
+                        <th>구분</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="ta_l">작성자</th>
+                        <td><em>첨부파일을 보시려면 클릭하세요.</em><a href="" class="btn btn_xx btn_gray mg_l8"><span>첨부파일 다운로드</span></a></td>
+                        <th class="ta_l">아이디</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">담당부서</th>
+                        <td>2</td>
+                        <th class="ta_l">최초등록일</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">내용</th>
+                        <td>2</td>
+                        <th class="ta_l">첨부파일</th>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="data_table_14 mg_t16">
+            <table>
+                <colgroup>
+                    <col style="width:15%;">
+                    <col>
+                    <col style="width:15%;">
+                    <col>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th class="ta_l">작성자</th>
+                        <td><em>첨부파일을 보시려면 클릭하세요.</em><a href="" class="btn btn_xx btn_gray mg_l8"><span>첨부파일 다운로드</span></a></td>
+                        <th class="ta_l">아이디</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">담당부서</th>
+                        <td>2</td>
+                        <th class="ta_l">최초등록일</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">내용</th>
+                        <td>2</td>
+                        <th class="ta_l">첨부파일</th>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="data_table_14 mg_t16">
+            <div class="no_list">
+                <span class="fs_16 fc_444 fw_500">조회된 데이터가 없습니다.</span>
+                <span class="fs_12 fc_888 mg_t8">조회된 데이터가 없습니다.</span>
+            </div>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">data_table_12</h2>
+        <div class="data_table_12 mg_t16">
+            <table>
+                <colgroup>
+                    <col style="width:15%;">
+                    <col>
+                    <col style="width:15%;">
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>비고</th>
+                        <th>구분</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="ta_l">작성자</th>
+                        <td><em class="fc_blue">첨부파일을 보시려면 클릭하세요.</em><a href="" class="btn btn_xx btn_gray mg_l8"><span>첨부파일 다운로드</span></a></td>
+                        <th class="ta_l">아이디</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">담당부서</th>
+                        <td>2</td>
+                        <th class="ta_l">최초등록일</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">내용</th>
+                        <td>2</td>
+                        <th class="ta_l">첨부파일</th>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="data_table_12 mg_t16">
+            <table>
+                <colgroup>
+                    <col style="width:15%;">
+                    <col>
+                    <col style="width:15%;">
+                    <col>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th class="ta_l">작성자</th>
+                        <td><em class="fc_blue">첨부파일을 보시려면 클릭하세요.</em><a href="" class="btn btn_xx btn_gray mg_l8"><span>첨부파일 다운로드</span></a></td>
+                        <th class="ta_l">아이디</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">담당부서</th>
+                        <td>2</td>
+                        <th class="ta_l">최초등록일</th>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th class="ta_l">내용</th>
+                        <td>2</td>
+                        <th class="ta_l">첨부파일</th>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="data_table_12 mg_t16">
+            <div class="no_list">
+                <span class="fs_16 fc_444 fw_500">조회된 데이터가 없습니다.</span>
+                <span class="fs_12 fc_888 mg_t8">조회된 데이터가 없습니다.</span>
+            </div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">board</h1>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">board link</h2>
+        <div class="board_link">
+            <i class="badge badge_sm badge_green"><span>답변</span></i>
+            <i class="ico_new">N</i>
+            <a href="" class="bl_link">wergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrghwergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrgh</a>
+            <i class="ico_file"></i>
+            <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+        </div>
+        <div class="board_link board_link_elps">
+            <i class="badge badge_sm badge_green"><span>답변</span></i>
+            <i class="ico_new">N</i>
+            <a href="" class="bl_link">wergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrghwergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrgh</a>
+            <i class="ico_file"></i>
+            <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+        </div>
+        <div class="board_link board_link_elps">
+            <i class="badge badge_sm badge_green"><span>답변</span></i>
+            <i class="ico_new">N</i>
+            <a href="" class="bl_link">wergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrghwergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrgh</a>
+            <i class="ico_file"></i>
+            <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+            <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">board list table</h2>
+        <div class="board_list_tbl">
+            <table>
+                <colgroup>
+                    <col style="width:10%;">
+                    <col>
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>첨부파일</th>
+                        <th>다운로드</th>
+                        <th>등록일</th>
+                        <th>조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg_top">
+                        <td><i class="btn btn_xs btn_gray btn_round"><span>공지</span></i></td>
+                        <td class="ta_l">
+                            <div class="board_link board_link_elps">
+                                <i class="badge badge_sm badge_green"><span>답변</span></i>
+                                <i class="ico_new">N</i>
+                                <a href="" class="bl_link">wergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrghwergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrgh</a>
+                                <i class="ico_file"></i>
+                                <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+                            </div>
+                        </td>
+                        <td><i class="board_ico_"></i></td>
+                        <td><a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a></td>
+                        <td>2000-00-00</td>
+                        <td>7,956</td>
+                    </tr>
+                    <tr class="bg_top">
+                        <td><i class="btn btn_xs btn_gray btn_round"><span>공지</span></i></td>
+                        <td class="ta_l">
+                            <div class="board_link">
+                                <i class="badge badge_sm badge_green"><span>답변</span></i>
+                                <i class="ico_new">N</i>
+                                <a href="" class="bl_link">wergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrghwergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrgh</a>
+                                <i class="ico_file"></i>
+                                <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+                            </div>
+                        </td>
+                        <td><i class="board_ico_"></i></td>
+                        <td><a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a></td>
+                        <td>2000-00-00</td>
+                        <td>7,956</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td class="ta_l">
+                            <div class="board_link">
+                                <i class="badge badge_sm badge_green"><span>답변</span></i>
+                                <i class="ico_new">N</i>
+                                <a href="" class="bl_link">wergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrghwergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrgh</a>
+                                <i class="ico_file"></i>
+                                <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+                            </div>
+                        </td>
+                        <td><i class="board_ico_"></i></td>
+                        <td><a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a></td>
+                        <td>2000-00-00</td>
+                        <td>7,956</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td class="ta_l">
+                            <div class="board_link board_link_elps">
+                                <i class="badge badge_sm badge_green"><span>답변</span></i>
+                                <i class="ico_new">N</i>
+                                <a href="" class="bl_link">wergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrghwergwergkluihwerliogwo;eihjtg;woeijgwioerjgwioerhg;woerihgl;eisrhga;wrijhg;woeijhrgweriojal;woierhjgl;wijrgh</a>
+                                <i class="ico_file"></i>
+                                <a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a>
+                            </div>
+                        </td>
+                        <td><i class="board_ico_"></i></td>
+                        <td><a href="" class="btn btn_xx btn_line_gray"><i class="ico_download"></i><span>다운로드</span></a></td>
+                        <td>2000-00-00</td>
+                        <td>7,956</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="board_list_tbl mg_t16">
+            <div class="no_list">
+                <span class="fs_16 fc_444 fw_500">조회된 데이터가 없습니다.</span>
+                <span class="fs_12 fc_888 mg_t8">조회된 데이터가 없습니다.</span>
+            </div>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">class list</h2>
+        <div class="class_list">
+            <ul>
+                <li><strong>등록일</strong><span>2000-00-00</span></li>
+                <li><strong>담당부서</strong><span>기획재정과</span></li>
+                <li><strong>조회수</strong><span>5,678,456</span></li>
+            </ul>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">file list</h2>
+        <div class="file_list">
+            <ul>
+                <li class="fl_etc"><a href="" class="fl_name mg_r12">Today a few components from the project.hwp</a><a href="" class="btn btn_xx btn_line_gray mg_r4"><i class="ico_download"></i><span>다운로드</span></a><a href="" class="btn btn_xx btn_line_gray"><i class="ico_search"></i><span>미리보기</span></a></li>
+                <li class="fl_hwp"><a href="" class="fl_name mg_r12">Today a few components from the project.hwp</a><a href="" class="btn btn_xx btn_line_gray mg_r4"><i class="ico_download"></i><span>다운로드</span></a><a href="" class="btn btn_xx btn_line_gray"><i class="ico_search"></i><span>미리보기</span></a></li>
+                <li class="fl_pdf"><a href="" class="fl_name mg_r12">Today a few components from the project.hwpToday a few components from the project.hwpToday a few components from the project.hwp</a><a href="" class="btn btn_xx btn_line_gray mg_r4"><i class="ico_download"></i><span>다운로드</span></a><a href="" class="btn btn_xx btn_line_gray"><i class="ico_search"></i><span>미리보기</span></a></li>
+                <li class="fl_ppt"><a href="" class="fl_name mg_r12">Today a few components from the project.hwp</a><a href="" class="btn btn_xx btn_line_gray mg_r4"><i class="ico_download"></i><span>다운로드</span></a><a href="" class="btn btn_xx btn_line_gray"><i class="ico_search"></i><span>미리보기</span></a></li>
+                <li class="fl_doc"><a href="" class="fl_name mg_r12">Today a few components from the project.hwp</a><a href="" class="btn btn_xx btn_line_gray mg_r4"><i class="ico_download"></i><span>다운로드</span></a><a href="" class="btn btn_xx btn_line_gray"><i class="ico_search"></i><span>미리보기</span></a></li>
+                <li class="fl_xls"><a href="" class="fl_name mg_r12">Today a few components from the project.hwpToday a few components from the project.hwpToday a few components from the project.hwpToday a few components from the project.hwp</a><a href="" class="btn btn_xx btn_line_gray mg_r4"><i class="ico_download"></i><span>다운로드</span></a><a href="" class="btn btn_xx btn_line_gray"><i class="ico_search"></i><span>미리보기</span></a></li>
+                <li class="fl_img"><a href="" class="fl_name mg_r12">Today a few components from the project.hwp</a><a href="" class="btn btn_xx btn_line_gray mg_r4"><i class="ico_download"></i><span>다운로드</span></a><a href="" class="btn btn_xx btn_line_gray"><i class="ico_search"></i><span>미리보기</span></a></li>
+            </ul>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">paging</h2>
+        <div class="paging">
+            <a href="" class="p_first" title="처음"><span class="hdn">처음페이지</span></a>
+            <a href="" class="p_prev" title="이전"><span class="hdn">이전페이지</span></a>
+            <strong>1</strong>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="">4</a>
+            <a href="">5</a>
+            <a href="">6</a>
+            <a href="">7</a>
+            <a href="">8</a>
+            <a href="">9</a>
+            <a href="" class="p_next" title="다음"><span class="hdn">다음페이지</span></a>
+            <a href="" class="p_last" title="끝"><span class="hdn">끝페이지</span></a>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">page skip</h2>
+        <div class="page_skip">
+            <ul>
+                <li class="ps_t">
+                    <span class="ps_ttl">이전글</span>
+                    <div class="ps_detail"><a href="">wl;rkjg;oawerkg;okwer;ghokawerhl;oakejrthajertophiaje;'rtohjkea'rtpohkja'eopfkjhrta'epokhrtja'epokthbn</a></div>
+                </li>
+                <li class="ps_b">
+                    <span class="ps_ttl">다음글</span>
+                    <div class="ps_detail">다음글이 없습니다.</div>
+                </li>
+            </ul>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">reply form</h2>
+        <div class="reply_form form_sm">
+            <div class="rf_t">
+                <textarea placeholder="댓글을 입력하세요. 최대 300자"></textarea>
+            </div>
+            <div class="rf_b">
+                <div class="rf_count"><strong>1</strong><em>/</em><span>300</span></div>
+                <a href="" class="btn btn_md btn_gray"><span>등록</span></a>
+            </div>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">reply box</h2>
+        <div class="reply_box">
+            <div class="rb_t dlr_va_m cl_b_aftr">
+                <div class="fl_l">
+                    <div class="rb_user"><span>ckgudcjf</span></div>
+                    <div class="rb_date">2000-00-00</div>
+                </div>
+                <div class="fl_r">
+                    <a href="" class="btn btn_xx btn_gray"><span>수정</span></a>
+                    <a href="" class="btn btn_xx btn_gray"><span>삭제</span></a>
+                </div>
+            </div>
+            <div class="rb_c">
+                <p class="fs_14 fc_666">
+                    2022 카타르월드컵 최약체로 평가받던 사우디아라비아가 아르헨티나를 꺾는 기적을 쓴 가운데 무함마드 빈 살만 사우디아라비아 왕세자가 자국 승리의 기쁨을 만끽하는 모습을 공개했습니다.
+                    어제(22일) 카타르 도하의 루사일 스타디움에서 열린 2022 카타르월드컵 C조 조별리그 1차전에서 사우디아라비아가 강호 아르헨티나를 상대로 2-1 승리를 거머쥐었습니다.
+                    이날 경기는 전반 9분 아르헨티나의 리오넬 메시가 페널티킥으로 선제 골을 얻어내면서 시작했으나, 아르헨티나의 연이은 오프사이드 판정과 사우디아라비아의 막강한 수비 조직력으로 경기의 패권은 점차 사우디아라비아에게 넘어갔습니다.
+                    후반전 사우디아라비아의 알 셰흐리가 천금 같은 동점 골을 터뜨리면서 분위기를 가져갔고, 5분 뒤 살렘 알 다우사리가 추가 골을 터뜨리면서 상황은 역전됐습니다.
+                    강호 아르헨티나를 제치는 결정적인 역전골을 터뜨린 살렘 알 다우사리는 백텀블링 세리모니를 보여주며 격한 몸짓으로 승리의 기쁨을 만끽하기도 했습니다.
+                    역전 골 이후에도 골문을 지킨 사우디아라비아 대표팀은 결국 달콤한 승리를 가져갔습니다.
+                </p>
+            </div>
+            <div class="rb_b dlr_va_m cl_b_aftr">
+                <div class="fl_l">
+                    <button class="btn_reply"><span>답글</span><em>4,567</em></button>
+                </div>
+                <div class="fl_r">
+                    <button class="btn_like">
+                        <!-- <span>좋아요</span> -->
+                        <em>456,756</em>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="reply_box reply_box_reply">
+            <div class="reply_form form_sm">
+                <div class="rf_t">
+                    <textarea placeholder="댓글을 입력하세요. 최대 300자"></textarea>
+                </div>
+                <div class="rf_b">
+                    <div class="rf_count"><strong>1</strong><em>/</em><span>300</span></div>
+                    <a href="" class="btn btn_md btn_gray"><span>등록</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="reply_box reply_box_reply">
+            <div class="rb_t dlr_va_m cl_b_aftr">
+                <div class="fl_l">
+                    <div class="rb_user"><span>ckgudcjf</span></div>
+                    <div class="rb_date">2000-00-00</div>
+                </div>
+                <div class="fl_r">
+                    <a href="" class="btn btn_xx btn_gray"><span>수정</span></a>
+                    <a href="" class="btn btn_xx btn_gray"><span>삭제</span></a>
+                </div>
+            </div>
+            <div class="rb_c">
+                <p class="fs_14 fc_666">
+                    2022 카타르월드컵 최약체로 평가받던 사우디아라비아가 아르헨티나를 꺾는 기적을 쓴 가운데 무함마드 빈 살만 사우디아라비아 왕세자가 자국 승리의 기쁨을 만끽하는 모습을 공개했습니다.<br />
+                    어제(22일) 카타르 도하의 루사일 스타디움에서 열린 2022 카타르월드컵 C조 조별리그 1차전에서 사우디아라비아가 강호 아르헨티나를 상대로 2-1 승리를 거머쥐었습니다.<br />
+                    이날 경기는 전반 9분 아르헨티나의 리오넬 메시가 페널티킥으로 선제 골을 얻어내면서 시작했으나, 아르헨티나의 연이은 오프사이드 판정과 사우디아라비아의 막강한 수비 조직력으로 경기의 패권은 점차 사우디아라비아에게 넘어갔습니다.<br />
+                    후반전 사우디아라비아의 알 셰흐리가 천금 같은 동점 골을 터뜨리면서 분위기를 가져갔고, 5분 뒤 살렘 알 다우사리가 추가 골을 터뜨리면서 상황은 역전됐습니다.<br />
+                    강호 아르헨티나를 제치는 결정적인 역전골을 터뜨린 살렘 알 다우사리는 백텀블링 세리모니를 보여주며 격한 몸짓으로 승리의 기쁨을 만끽하기도 했습니다.<br />
+                    역전 골 이후에도 골문을 지킨 사우디아라비아 대표팀은 결국 달콤한 승리를 가져갔습니다.
+                </p>
+            </div>
+            <div class="rb_b dlr_va_m cl_b_aftr">
+                <div class="fl_r">
+                    <button class="btn_like">
+                        <!-- <span>좋아요</span> -->
+                        <em>456,756</em>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="reply_box">
+            <div class="rb_t dlr_va_m cl_b_aftr">
+                <div class="fl_l">
+                    <div class="rb_user"><span>ckgudcjf</span></div>
+                    <div class="rb_date">2000-00-00</div>
+                </div>
+                <div class="fl_r">
+                    <a href="" class="btn btn_xx btn_gray"><span>수정</span></a>
+                    <a href="" class="btn btn_xx btn_gray"><span>삭제</span></a>
+                </div>
+            </div>
+            <div class="rb_c">
+                <p class="fs_14 fc_666">
+                    2022 카타르월드컵 최약체로 평가받던 사우디아라비아가 아르헨티나를 꺾는 기적을 쓴 가운데 무함마드 빈 살만 사우디아라비아 왕세자가 자국 승리의 기쁨을 만끽하는 모습을 공개했습니다.
+                    어제(22일) 카타르 도하의 루사일 스타디움에서 열린 2022 카타르월드컵 C조 조별리그 1차전에서 사우디아라비아가 강호 아르헨티나를 상대로 2-1 승리를 거머쥐었습니다.
+                    이날 경기는 전반 9분 아르헨티나의 리오넬 메시가 페널티킥으로 선제 골을 얻어내면서 시작했으나, 아르헨티나의 연이은 오프사이드 판정과 사우디아라비아의 막강한 수비 조직력으로 경기의 패권은 점차 사우디아라비아에게 넘어갔습니다.
+                    후반전 사우디아라비아의 알 셰흐리가 천금 같은 동점 골을 터뜨리면서 분위기를 가져갔고, 5분 뒤 살렘 알 다우사리가 추가 골을 터뜨리면서 상황은 역전됐습니다.
+                    강호 아르헨티나를 제치는 결정적인 역전골을 터뜨린 살렘 알 다우사리는 백텀블링 세리모니를 보여주며 격한 몸짓으로 승리의 기쁨을 만끽하기도 했습니다.
+                    역전 골 이후에도 골문을 지킨 사우디아라비아 대표팀은 결국 달콤한 승리를 가져갔습니다.
+                </p>
+            </div>
+            <div class="rb_b dlr_va_m cl_b_aftr">
+                <div class="fl_l">
+                    <button class="btn_reply"><span>답글</span><em>4,567</em></button>
+                </div>
+                <div class="fl_r">
+                    <button class="btn_like">
+                        <!-- <span>좋아요</span> -->
+                        <em>456,756</em>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">box_</h1>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">box_gray_round</h2>
+        <div class="box_gray_round">
+            <span class="text_14 fw_700">타이틀</span>
+            <ul class="list_13 mg_t12">
+                <li><i class="l_dot"></i>세금계산서는 주문건별로 발행되며 과세/면세 각 1장씩 발행 됩니다.(*과세: 음반, DVD, Gift, 분철비용 / 면세: 도서)</li>
+                <li><i class="l_bar"></i>세금계산서는 상품 발송일로부터 익월 7일까지만 신청 되며, 상품이 모두 발송된 이후에 신청내역이 조회됩니다.</li>
+                <li><i class="l_txt">가.</i>(예 : 2020년 12월 31일 결제한 주문건은 2021년 1월 7일까지 신청 해야 함)</li>
+                <li><i class="l_txt">83</i>세금계산서 발행일자는 결제완료일로 기재됩니다.</li>
+            </ul>
+        </div>
+
+        <h1 style="font-size:32px; line-height:40px; font-weight:700; margin-top:128px;">layer</h1>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">target toggle + modal</h2>
+        <button class="dt_l bd_hdn" data-target="dt_c0">modal xx 320</button>
+        <button class="dt_l bd_hdn" data-target="dt_c1">modal xs 480</button>
+        <button class="dt_l bd_hdn" data-target="dt_c2">modal sm 640</button>
+        <button class="dt_l bd_hdn" data-target="dt_c3">modal md 800</button>
+        <button class="dt_l bd_hdn" data-target="dt_c4">modal lg 960</button>
+        <div class="modal modal_lg dt_c4">
+            <div>
+                <button class="btn_popup_close"><em class="hdn">모달닫기</em></button>
+                <div class="m_h">
+                    <h5 class="m_title">타이틀</h5>
+                </div>
+                <div class="m_c">
+                    <div class="mc_c">
+                        <!-- <div style="height:10000px;"> -->
+                            <div class="article_top dlr_va_m cl_b_aftr">
+                                <div class="fl_l">
+                                    <h5 class="title_18">서브타이틀_18</h5>
+                                    <p class="fs_12 fc_666">스팸메일함의 모든 메일은 휴지통으로 이동합니다.</p>
+                                </div>
+                                <div class="fl_r">
+                                    <div class="form_xs">
+                                        <div class="f_srch dp_ib"><input type="text" placeholder="검색어를 입력하세요."><button class="btn btn_xs"><i class="ico_search"></i></button></div>
+                                    </div>
+                                    <button class="btn btn_xs btn_line_black"><i class="ico_download"></i><span>다운로드</span></button>
+                                </div>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div class="m_b">
+                    <div class="b_btn">
+                        <a href="" class="btn btn_sm btn_gray btn_popup_close"><span>취소</span></a>
+                        <a href="" class="btn btn_sm btn_black" onclick="modalClose('dt_c4'); return false;"><span>확인</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal_md dt_c3">
+            <div>
+                <button class="btn_popup_close"><em class="hdn">모달닫기</em></button>
+                <div class="m_h">
+                    <h5 class="m_title">타이틀</h5>
+                </div>
+                <div class="m_c">
+                    <div class="mc_c">
+                        <!-- <div class="article_top dlr_va_m cl_b_aftr">
+                            <div class="fl_l">
+                                <h5 class="title_18">서브타이틀_18</h5>
+                                <p class="fs_12 fc_666">스팸메일함의 모든 메일은 휴지통으로 이동합니다.</p>
+                            </div>
+                            <div class="fl_r">
+                                <div class="form_xs">
+                                    <div class="f_srch dp_ib"><input type="text" placeholder="검색어를 입력하세요."><button class="btn btn_xs"><i class="ico_search"></i></button></div>
+                                </div>
+                                <button class="btn btn_xs btn_line_black"><i class="ico_download"></i><span>다운로드</span></button>
+                            </div>
+                        </div> -->
+                        <div class="data_table_12">
+                            <table>
+                                <colgroup>
+                                    <col style="width:20%;">
+                                    <col>
+                                    <col style="width:20%;">
+                                    <col>
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th class="ta_l">작성자</th>
+                                        <td><a href="" class="btn btn_xx btn_gray mg_l8"><span>첨부파일 다운로드</span></a></td>
+                                        <th class="ta_l">아이디</th>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="ta_l">담당부서</th>
+                                        <td>2</td>
+                                        <th class="ta_l">최초등록일</th>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="ta_l">내용</th>
+                                        <td>2</td>
+                                        <th class="ta_l">첨부파일</th>
+                                        <td>4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="m_b">
+                    <div class="b_btn">
+                        <a href="" class="btn btn_sm btn_gray btn_popup_close"><span>취소</span></a>
+                        <a href="" class="btn btn_sm btn_black" onclick="modalClose('dt_c3'); return false;"><span>확인</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal_sm dt_c2">
+            <div>
+                <button class="btn_popup_close"><em class="hdn">모달닫기</em></button>
+                <div class="m_h">
+                    <h5 class="m_title">타이틀</h5>
+                </div>
+                <div class="m_c">
+                    <div class="mc_c">
+                        <div class="article_top dlr_va_m cl_b_aftr">
+                            <div class="fl_l">
+                                <h5 class="title_18">서브타이틀_18</h5>
+                                <p class="fs_12 fc_666">스팸메일함의 모든 메일은 휴지통으로 이동합니다.</p>
+                            </div>
+                            <div class="fl_r">
+                                <button class="btn btn_xs btn_line_black"><i class="ico_download"></i><span>다운로드</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m_b">
+                    <div class="b_btn">
+                        <a href="" class="btn btn_sm btn_gray btn_popup_close"><span>취소</span></a>
+                        <a href="" class="btn btn_sm btn_black" onclick="modalClose('dt_c2'); return false;"><span>확인</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal_xs dt_c1">
+            <div>
+                <button class="btn_popup_close"><em class="hdn">모달닫기</em></button>
+                <div class="m_h">
+                    <h5 class="m_title">타이틀</h5>
+                </div>
+                <div class="m_c">
+                    <div class="mc_c">
+                        <h5 class="title_18">서브타이틀_18</h5>
+                    </div>
+                </div>
+                <div class="m_b">
+                    <div class="b_btn">
+                        <a href="" class="btn btn_sm btn_gray btn_popup_close"><span>취소</span></a>
+                        <a href="" class="btn btn_sm btn_black" onclick="modalClose('dt_c1'); return false;"><span>확인</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal_xx dt_c0">
+            <div>
+                <button class="btn_popup_close"><em class="hdn">모달닫기</em></button>
+                <div class="m_h">
+                    <h5 class="m_title">타이틀</h5>
+                </div>
+                <div class="m_c">
+                    <div class="mc_c">
+                        <h5 class="title_18">서브타이틀_18</h5>
+                    </div>
+                </div>
+                <div class="m_b">
+                    <div class="b_btn">
+                        <a href="" class="btn btn_sm btn_gray btn_popup_close"><span>취소</span></a>
+                        <a href="" class="btn btn_sm btn_black" onclick="modalClose('dt_c0'); return false;"><span>확인</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 style="font-size:24px; line-height:32px; font-weight:700; margin-top:24px;">alert(dom create - remove)</h2>
+        <button class="al01">alert 제목있는경우</button>
+        <button class="al02">alert 제목없는경우</button>
+
+    </div>
+    
+</body>
+</html>

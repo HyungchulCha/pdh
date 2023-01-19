@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+  <title>조달데이터허브 차트</title>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" href="../image/header/favicon.ico">
+
+  <link rel="stylesheet" href="../css/pdh-base.css">
+  <link rel="stylesheet" href="../css/pdh-cont.css">
+  <link rel="stylesheet" href="../css/pdh-chart.css">
+  <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../css/jquery.scrollbar.css">
+
+  <script src="../js/jquery-3.4.2.min.js"></script>
+  <script src="../js/jquery.throttle-debounce.min.js"></script>
+  <script src="../js/swiper-bundle.min.js"></script>
+  <script src="../js/jquery.scrollbar.js"></script>
+
+  <!-- <script src="../js/d3.v4.min.js"></script> -->
+  <script src="../js/d3.v7.min.js"></script>
+  <script src="../js/topojson.v3.min.js"></script>
+
+  <script src="../js/chart.js"></script>
+  <script src="../js/chart-utils.min.js"></script><!-- 커스텀-->
+  <script src="../js/sk-m.js"></script><!-- 커스텀-->
+  <script src="../js/sk-p.js"></script><!-- 커스텀-->
+
+  <script src="../js/pdh-base.js"></script>
+  <script src="../js/pdh-cont.js"></script>
+  <script src="../js/pdh-chart.js"></script>
+
+</head>
+<body>
+
+  <div style="padding:32px 0 64px; width:960px; margin:0 auto;">
+
+    <!-- <script>
+      const _fontSize = {
+        xAxis: 0,
+        yAxis: 0,
+        xValue: 0,
+        yValue: 0,
+        xDescript: 0,
+        yDescript: 0,
+      };
+      const _color = [];
+    </script>
+
+    <svg id="my_dataviz" width="960" height="960"></svg>
+    <script>
+
+      // The svg
+      const _svg = d3.select('#my_dataviz'),
+          width = +_svg.attr("width"),
+          height = +_svg.attr("height");
+      
+      // Map and projection
+      const projection = d3.geoMercator()
+          .center([0,0])                // GPS of location to zoom on
+          // .scale(100)                       // This is like the zoom
+          .translate([ width/2, height/2 ])
+      
+      Promise.all([
+      d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+      d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv")
+      ]).then(function (initialize) {
+
+          let dataGeo = initialize[0]
+          let data = initialize[1]
+      
+        // Create a color scale
+        const color = d3.scaleOrdinal()
+          .domain(data.map(d => d.homecontinent))
+          .range(d3.schemePaired);
+      
+        // Add a scale for bubble size
+        const valueExtent = d3.extent(data, d => +d.n)
+        const size = d3.scaleSqrt()
+          .domain(valueExtent)  // What's in the data
+          .range([ 1, 50])  // Size in pixel
+      
+        // Draw the map
+        _svg.append("g")
+            .selectAll("path")
+            .data(dataGeo.features)
+            .join("path")
+              .attr("fill", "#b8b8b8")
+              .attr("d", d3.geoPath()
+                  .projection(projection)
+              )
+            .style("stroke", "none")
+            .style("opacity", .3)
+      
+        // Add circles:
+        _svg
+          .selectAll("myCircles")
+          .data(data.sort((a,b) => +b.n - +a.n).filter((d,i) => i<1000))
+          .join("circle")
+            .attr("cx", d => projection([+d.homelon, +d.homelat])[0])
+            .attr("cy", d => projection([+d.homelon, +d.homelat])[1])
+            .attr("r", d => size(+d.n))
+            .style("fill", d => color(d.homecontinent))
+            .attr("stroke", d=> {if (d.n>2000) {return "black"} else {return "none"}  })
+            .attr("stroke-width", 1)
+            .attr("fill-opacity", .4)
+      
+      
+      
+        // Add title and explanation
+        _svg
+          .append("text")
+            .attr("text-anchor", "end")
+            .style("fill", "black")
+            .attr("x", width - 10)
+            .attr("y", height - 30)
+            .attr("width", 90)
+            .html("WHERE SURFERS LIVE")
+            .style("font-size", 14)
+      
+      
+        // --------------- //
+        // ADD LEGEND //
+        // --------------- //
+      
+        // Add legend: circles
+        const valuesToShow = [100,4000,15000];
+        const xCircle = 40;
+        const xLabel = 90;
+        _svg
+          .selectAll("legend")
+          .data(valuesToShow)
+          .join("circle")
+            .attr("cx", xCircle)
+            .attr("cy", d => height - size(d))
+            .attr("r", d => size(d))
+            .style("fill", "none")
+            .attr("stroke", "black")
+      
+        // Add legend: segments
+        _svg
+          .selectAll("legend")
+          .data(valuesToShow)
+          .join("line")
+            .attr('x1', d => xCircle + size(d))
+            .attr('x2', xLabel)
+            .attr('y1', d => height - size(d))
+            .attr('y2', d => height - size(d))
+            .attr('stroke', 'black')
+            .style('stroke-dasharray', ('2,2'))
+      
+        // Add legend: labels
+        _svg
+          .selectAll("legend")
+          .data(valuesToShow)
+          .join("text")
+            .attr('x', xLabel)
+            .attr('y', d => height - size(d))
+            .text(d => d)
+            .style("font-size", 10)
+            .attr('alignment-baseline', 'middle')
+      })
+      
+      </script> -->
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Test Bar - d3.js</h1>
+    <div class="chart_bar__"></div>
+
+    <script>
+
+    function findLongestWord(arr) {
+      let arrmap = arr.map(x => x.length);
+      let maxNumber = Math.max(...arrmap);
+      let index = arrmap.indexOf(maxNumber);
+      return arr[index];
+    }
+
+    function textWidth(string, fontSize) {
+      var div = document.createElement('div');
+      div.innerText = string;
+      div.classList.add('text-catch');
+      div.style.cssText = `display:inline-block;font-size:${fontSize}px;`;
+      document.body.appendChild(div);
+      var divWidth = div.offsetWidth;
+      div.remove();
+      return divWidth;
+    }
+
+    BarChart__(data06, {
+      dom: '.chart_bar__',
+      axisFontSize: 12,
+      x: (d) => d.letter,
+      y: (d) => d.frequency,
+      xDomain: d3.groupSort(
+        data06,
+        ([d]) => -d.frequency,
+        (d) => d.letter
+      ),
+      yFormat: "%",
+      yLabel: "↑ Frequency",
+      color: "steelblue",
+    });
+
+    function BarChart__(data,
+      {
+        dom,
+        axisFontSize,
+        x = (d, i) => i,
+        y = (d) => d,
+        title,
+        marginTop = 20,
+        marginRight = 0,
+        marginBottom = 30,
+        marginLeft = 40,
+        width = 960,
+        height = 480,
+        xDomain,
+        xRange = [marginLeft, width - marginRight],
+        yType = d3.scaleLinear,
+        yDomain,
+        yRange = [height - marginBottom, marginTop],
+        xPadding = 0.1,
+        yFormat,
+        yLabel,
+        color = "currentColor",
+      } = {}
+    ) {
+      const X = d3.map(data, x);
+      const Y = d3.map(data, y);
+
+
+      if (xDomain === undefined) xDomain = X;
+      if (yDomain === undefined) yDomain = [0, d3.max(Y)];
+      xDomain = new d3.InternSet(xDomain);
+
+
+      const I = d3.range(X.length).filter((i) => xDomain.has(X[i]));
+
+      const xScale = d3.scaleBand(xDomain, xRange).padding(xPadding);
+      const yScale = yType(yDomain, yRange);
+      const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
+      const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);
+
+      if (title === undefined) {
+        const formatValue = yScale.tickFormat(100, yFormat);
+        title = (i) => `${X[i]}\n${formatValue(Y[i])}`;
+      } else {
+        const O = d3.map(data, (d) => d);
+        const T = title;
+        title = (i) => T(O[i], i, data);
+      }
+
+      const svg = d3
+        .create("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [0, 0, width, height])
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+      svg
+        .append("g")
+        .attr("transform", `translate(${marginLeft},0)`)
+        .call(yAxis)
+        .call((g) => g.select(".domain").remove())
+        .call((g) =>
+          g
+            .selectAll(".tick line")
+            .clone()
+            .attr("x2", width - marginLeft - marginRight)
+            .attr("stroke-opacity", 0.1)
+        )
+        .call((g) =>
+          g
+            .append("text")
+            .attr("x", -marginLeft)
+            .attr("y", 10)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .text(yLabel)
+        );
+
+      const bar = svg
+        .append("g")
+        .attr("fill", color)
+        .selectAll("rect")
+        .data(I)
+        .join("rect")
+        .attr("x", (i) => xScale(X[i]))
+        .attr("y", (i) => yScale(Y[i]))
+        .attr("height", (i) => yScale(0) - yScale(Y[i]))
+        .attr("width", xScale.bandwidth());
+
+      if (title) bar.append("title").text(title);
+
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height - marginBottom})`)
+        .call(xAxis);
+
+      document.querySelector(dom).append(svg.node());
+    }
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Test - d3.js</h1>
+    <div class="chart_test"></div>
+
+    <script>
+
+      /*
+
+      domain - key의 의미로 사용
+      range - key에 매칭된 value의 의미로 사용
+      a = d3.scaleOrdinal(arrayDomain, arrayRange) - f -> f(domainValue)
+      a.domain() - arrayDomain, a.range() - arrayRange
+      d3.scaleOrdinal().domain(arrayDomain).range(arrayRange) - f -> f(domainValue)
+
+      sort(null)
+      sort((a, b) => a - b)
+      sort((a, b) => b - a)
+      sort(d3.ascending)
+      sort((a, b) => d3.ascending(a, b))
+      sort(d3.desending)
+      sort((a, b) => d3.desending(a, b))
+
+      value(d => d)
+
+      data = {a:1, b:2}
+      Object.entries(data) - [[a, 1], [b, 2]]
+      d3.pie().sort().value() - f -> f(Object.entries(data)) - pieData = {data, index, value, startAngle, endAngle, padAngle}
+      
+
+      d3.arc()
+        .innerRadius(radiusValue) 내부 pie 라인 정보
+        .outerRadius(radiusValue) 외부 pie 라인 정보
+        .centroid() pie 각의 반(중심)
+
+      d3.on(type, callback)
+      type - start, drag, end, mouseover, mouseout
+
+      */
+    
+    TestChart();
+
+    function TestChart() {
+
+      var width = 960,
+        height = 960,
+        margin = 0;
+
+      var radius = Math.min(width, height) / 2 - margin;
+
+      var svg = d3
+        .select(".chart_test")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      var data = { 가가가가가가가가가가가가가가가가가가가가가가가가가가가: 9, 나: 20, 다: 30, 라: 8, 마: 12, 바: 3, 사: 7, 아: 14 };
+
+      var color = d3
+        .scaleOrdinal()
+        .domain(Object.keys(data))
+        .range(d3.schemeDark2);
+
+      var pie = d3
+        .pie()
+        .sort((a, b) => b[1] - a[1])
+        .value((d) => {return d[1]});
+
+      var data_ready = pie(Object.entries(data));
+
+      var arc = d3
+        .arc()
+        .innerRadius(radius * 0)
+        .outerRadius(radius * 0.64);
+
+      var outerArc = d3
+        .arc()
+        .innerRadius(radius * 0.72)
+        .outerRadius(radius * 0.72);
+
+      var textArc = d3.arc().innerRadius(radius * 0.8).outerRadius(radius * 0.8)
+
+      svg
+        .selectAll("allSlices")
+        .data(data_ready)
+        .join("path")
+        .attr("d", (d) => {return arc(d)})
+        .attr("fill", (d) => color(d.data[1]))
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7);
+
+      svg
+        .selectAll("allPolylines")
+        .data(data_ready)
+        .join("polyline")
+        .attr("stroke", "#ccc")
+        .style("fill", "none")
+        .attr("stroke-width", 1)
+        .attr("points", function (d) {
+          const posA = arc.centroid(d);
+          const posB = outerArc.centroid(d);
+          const posC = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          posC[0] = radius * 1 * (midangle < Math.PI ? 1 : -1);
+          posA[0] = posA[0] * 2;
+          posA[1] = posA[1] * 2;
+          return [posA, posB, posC];
+        });
+
+      // svg
+      //   .selectAll(".allLabels")
+      //   .data(data_ready)
+      //   .join("text")
+      //   .text((d) => `${d.data[0]} ${d.data[1]}`)
+      //   .attr("transform", function (d) {
+      //     const pos = outerArc.centroid(d);
+      //     const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+      //     pos[0] = radius * 1 * (midangle < Math.PI ? 1 : -1);
+      //     pos[1] = pos[1] - (width * 0.0125);
+      //     return `translate(${pos})`;
+      //   })
+      //   .style("text-anchor", function (d) {
+      //     const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+      //     return midangle < Math.PI ? "end" : "start";
+      //   })
+      //   .style("font-size", (width * 0.025) + "px");
+
+      svg
+        .selectAll()
+        .data(data_ready)
+        .join("text")
+        // .attr({
+        //   'class': 'text',
+        //   // 'transform': d => {
+        //   //   const pos = textArc.centroid(d);
+        //   //   const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+        //   //   // pos[0] = radius * 1 * (midangle < Math.PI ? 1 : -1);
+        //   //   // pos[1] = pos[1] - (width * 0.0125);
+        //   //   return `translate(${pos})`;
+        //   // }
+        // })
+        .attr('class', 'text')
+        .attr("transform", function (d) {
+          const pos = textArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          // pos[0] = radius * 1 * (midangle < Math.PI ? 1 : -1);
+          // pos[1] = pos[1] - (width * 0.0125);
+          return `translate(${pos})`;
+        })
+        .style("text-anchor", function (d) {
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < Math.PI ? "start" : "end";
+        })
+        .append('tspan')
+        .text((d) => `${d.data[0]} ${d.data[1]}`)
+        // .style('position', 'absolute')
+        // .style('left', function (d) {
+        //   const pos = textArc.centroid(d);
+        //   const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+        //   // pos[0] = radius * 1 * (midangle < Math.PI ? 1 : -1);
+        //   // pos[1] = pos[1] - (width * 0.0125);
+        //   return `${pos[0]}px`;
+        // })
+        // .style('top', function (d) {
+        //   const pos = textArc.centroid(d);
+        //   const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+        //   // pos[0] = radius * 1 * (midangle < Math.PI ? 1 : -1);
+        //   // pos[1] = pos[1] - (width * 0.0125);
+        //   return `${pos[1]}px`;
+        // })
+        
+        .style('text-align', 'center')
+        .style("font-size", (width * 0.025) + "px");
+
+      // svg
+      //   .selectAll("allLabels")
+      //   .data(data_ready)
+      //   .join("text")
+      //   .text((d) => d.data[1])
+      //   .attr("transform", function (d) {
+      //     const pos = outerArc.centroid(d);
+      //     const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+      //     pos[0] = radius * 1 * (midangle < Math.PI ? 1 : -1);
+      //     pos[1] = pos[1] + 28;
+      //     return `translate(${pos})`;
+      //   })
+      //   .style("text-anchor", function (d) {
+      //     const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+      //     return midangle < Math.PI ? "end" : "start";
+      //   })
+      //   .style("font-size", "24px");
+    }
+
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Pie - d3.js</h1>
+    <div class="chart_pie"></div>
+
+    <script>
+
+      /*
+
+      domain - key의 의미로 사용
+      range - key에 매칭된 value의 의미로 사용
+      a = d3.scaleOrdinal(arrayDomain, arrayRange) - f -> f(domainValue)
+      a.domain() - arrayDomain, a.range() - arrayRange
+      d3.scaleOrdinal().domain(arrayDomain).range(arrayRange) - f -> f(domainValue)
+
+      sort(null)
+      sort((a, b) => a - b)
+      sort((a, b) => b - a)
+      sort(d3.ascending)
+      sort((a, b) => d3.ascending(a, b))
+      sort(d3.desending)
+      sort((a, b) => d3.desending(a, b))
+
+      value(d => d)
+
+      data = {a:1, b:2}
+      Object.entries(data) - [[a, 1], [b, 2]]
+      d3.pie().sort().value() - f -> f(Object.entries(data)) - pieData
+
+      */
+    
+    PieChart();
+
+    function PieChart() {
+
+      // const Tooltip = d3.select('body')
+      //   .append('div')
+      //   .attr('class', 'map-tooltip')
+      //   .style('visibility', 'hidden')
+      //   .style('background-color', 'white')
+      //   .style('border', 'solid')
+      //   .style('border-width', '2px')
+      //   .style('border-radius', '5px')
+      //   .style('padding', '5px')
+      //   .style('position', 'absolute')
+      //   .on('mouseover', (event) => {
+      //     // A bug where if the user's cursor gets on top of the Tooltip, it flashes infinitely until the user's cursor moves
+      //     // Very distracting and this gets rid of it completely. Besides, the cursor should never be over the Tooltip anyway
+      //     Tooltip.style('visibility', 'hidden');
+      //   });
+
+      // const zoom = d3.zoom()
+      //   .on('zoom', (event) => {
+      //     svg.attr('transform', event.transform);
+      //   })
+      //   .scaleExtent([-40, 40]);
+
+      const taint = d3.scaleOrdinal(["earth", "wind", "fire"], ["green", "red", "blue"]);
+      const invert = d3.scaleOrdinal(taint.range(), taint.domain());
+      // console.log(taint, taint.domain(), taint.range(), invert, invert('green'));
+
+
+      var width = 960,
+        height = 960,
+        margin = 40;
+
+      var radius = Math.min(width, height) / 2 - margin;
+
+      var svg = d3
+        .select(".chart_pie")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      var data = { a: 9, b: 20, c: 30, d: 8, e: 12, f: 3, g: 7, h: 14 };
+
+      var color = d3
+        .scaleOrdinal()
+        .domain(Object.keys(data))
+        .range(d3.schemeDark2);
+
+      var pie = d3
+        .pie()
+        .sort((a, b) => b[1] - a[1])
+        .value((d) => {return d[1]});
+
+      var data_ready = pie(Object.entries(data));
+
+      var arc = d3
+        .arc()
+        .innerRadius(radius * 0)
+        .outerRadius(radius * 0.8);
+
+      var outerArc = d3
+        .arc()
+        .innerRadius(radius * 0.9)
+        .outerRadius(radius * 0.9);
+
+      svg
+        .selectAll("allSlices")
+        .data(data_ready)
+        .join("path")
+        .attr("d", arc)
+        .attr("fill", (d) => color(d.data[1]))
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7);
+
+      svg
+        .selectAll("allPolylines")
+        .data(data_ready)
+        .join("polyline")
+        .attr("stroke", "black")
+        .style("fill", "none")
+        .attr("stroke-width", 1)
+        .attr("points", function (d) {
+          const posA = arc.centroid(d);
+          const posB = outerArc.centroid(d);
+          const posC = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1);
+          return [posA, posB, posC];
+        });
+
+      svg
+        .selectAll("allLabels")
+        .data(data_ready)
+        .join("text")
+        .text((d) => d.data[0])
+        .attr("transform", function (d) {
+          const pos = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+          return `translate(${pos})`;
+        })
+        .style("text-anchor", function (d) {
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < Math.PI ? "start" : "end";
+        });
+    }
+
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Bar - d3.js</h1>
+    <div class="chart_bar"></div>
+
+    <script>
+    chart_bar = BarChart(data06, {
+      x: (d) => d.letter,
+      y: (d) => d.frequency,
+      xDomain: d3.groupSort(
+        data06,
+        ([d]) => -d.frequency,
+        (d) => d.letter
+      ),
+      yFormat: "%",
+      yLabel: "↑ Frequency",
+      color: "steelblue",
+    });
+    document.querySelector(".chart_bar").append(chart_bar);
+
+    function BarChart(
+      data,
+      {
+        x = (d, i) => i,
+        y = (d) => d,
+        title,
+        marginTop = 20,
+        marginRight = 0,
+        marginBottom = 30,
+        marginLeft = 40,
+        width = 960,
+        height = 480,
+        xDomain,
+        xRange = [marginLeft, width - marginRight],
+        yType = d3.scaleLinear,
+        yDomain,
+        yRange = [height - marginBottom, marginTop],
+        xPadding = 0.1,
+        yFormat,
+        yLabel,
+        color = "currentColor",
+      } = {}
+    ) {
+      const X = d3.map(data, x);
+      const Y = d3.map(data, y);
+
+      if (xDomain === undefined) xDomain = X;
+      if (yDomain === undefined) yDomain = [0, d3.max(Y)];
+      xDomain = new d3.InternSet(xDomain);
+
+      const I = d3.range(X.length).filter((i) => xDomain.has(X[i]));
+
+      const xScale = d3.scaleBand(xDomain, xRange).padding(xPadding);
+      const yScale = yType(yDomain, yRange);
+      const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
+      const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);
+
+      if (title === undefined) {
+        const formatValue = yScale.tickFormat(100, yFormat);
+        title = (i) => `${X[i]}\n${formatValue(Y[i])}`;
+      } else {
+        const O = d3.map(data, (d) => d);
+        const T = title;
+        title = (i) => T(O[i], i, data);
+      }
+
+      const svg = d3
+        .create("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [0, 0, width, height])
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+      svg
+        .append("g")
+        .attr("transform", `translate(${marginLeft},0)`)
+        .call(yAxis)
+        .call((g) => g.select(".domain").remove())
+        .call((g) =>
+          g
+            .selectAll(".tick line")
+            .clone()
+            .attr("x2", width - marginLeft - marginRight)
+            .attr("stroke-opacity", 0.1)
+        )
+        .call((g) =>
+          g
+            .append("text")
+            .attr("x", -marginLeft)
+            .attr("y", 10)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .text(yLabel)
+        );
+
+      const bar = svg
+        .append("g")
+        .attr("fill", color)
+        .selectAll("rect")
+        .data(I)
+        .join("rect")
+        .attr("x", (i) => xScale(X[i]))
+        .attr("y", (i) => yScale(Y[i]))
+        .attr("height", (i) => yScale(0) - yScale(Y[i]))
+        .attr("width", xScale.bandwidth());
+
+      if (title) bar.append("title").text(title);
+
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height - marginBottom})`)
+        .call(xAxis);
+
+      return svg.node();
+    }
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Bar Horizontal - d3.js</h1>
+    <div class="chart_barhorizontal"></div>
+    
+    <script>
+    
+    chart_barhorizontal = BarHorizontalChart(data06, {
+      x: (d) => d.frequency,
+      y: (d) => d.letter,
+      yDomain: d3.groupSort(
+        data06,
+        ([d]) => -d.frequency,
+        (d) => d.letter
+      ),
+      xFormat: "%",
+      xLabel: "Frequency →",
+      color: "steelblue",
+      fontSize: 10,
+      marginLeft: textWidth(findLongestWord(data06.map(d=> d.letter)), 10)
+    });
+    document.querySelector(".chart_barhorizontal").append(chart_barhorizontal);
+
+    textWidth(findLongestWord(data06.map(d=> d.letter)), 20);
+
+    function BarHorizontalChart(
+      data,
+      {
+        x = (d) => d,
+        y = (d, i) => i,
+        title,
+        marginTop = 30,
+        marginRight = 0,
+        marginBottom = 0,
+        marginLeft = 30,
+        width = 960,
+        height = 960,
+        xType = d3.scaleLinear,
+        xDomain,
+        xRange = [marginLeft, width - marginRight],
+        xFormat,
+        xLabel,
+        yPadding = 0.1,
+        yDomain,
+        yRange,
+        color = "currentColor",
+        titleColor = "white",
+        titleAltColor = "currentColor",
+        fontSize,
+      } = {}
+    ) {
+      const X = d3.map(data, x);
+      const Y = d3.map(data, y);
+
+      if (xDomain === undefined) xDomain = [0, d3.max(X)];
+      if (yDomain === undefined) yDomain = Y;
+      yDomain = new d3.InternSet(yDomain);
+
+      const I = d3.range(X.length).filter((i) => yDomain.has(Y[i]));
+
+      if (height === undefined)
+        height =
+          Math.ceil((yDomain.size + yPadding) * 25) + marginTop + marginBottom;
+      if (yRange === undefined) yRange = [marginTop, height - marginBottom];
+
+      const xScale = xType(xDomain, xRange);
+      const yScale = d3.scaleBand(yDomain, yRange).padding(yPadding);
+      const xAxis = d3.axisTop(xScale).ticks(width / 80, xFormat);
+      const yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
+
+      if (title === undefined) {
+        const formatValue = xScale.tickFormat(100, xFormat);
+        title = (i) => `${formatValue(X[i])}`;
+      } else {
+        const O = d3.map(data, (d) => d);
+        const T = title;
+        title = (i) => T(O[i], i, data);
+      }
+
+      const svg = d3
+        .create("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [0, 0, width, height])
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+      const _fontSize = {
+        xa: 16,
+        ya: 16,
+        xd: 16,
+        yd: 16
+      };
+
+      svg
+        .append("g")
+        .attr('class', 'aaaaaa')
+        .style('font-size', 20)
+        .attr("transform", `translate(0,${marginTop})`)
+        .call(xAxis)
+        .call((g) => g.select(".domain").remove())
+        .call((g) =>
+          g
+            .selectAll(".tick line")
+            .clone()
+            .attr("y2", height - marginTop - marginBottom)
+            .attr("stroke-opacity", 0.1)
+        )
+        .call((g) =>
+          g
+            .append("text")
+            .attr("x", width - marginRight)
+            .attr("y", -22)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "end")
+            .text(xLabel)
+        );
+
+      svg
+        .append("g")
+        .attr("fill", color)
+        .selectAll("rect")
+        .data(I)
+        .join("rect")
+        .attr("x", xScale(0))
+        .attr("y", (i) => yScale(Y[i]))
+        .attr("width", (i) => xScale(X[i]) - xScale(0))
+        .attr("height", yScale.bandwidth());
+
+      svg
+        .append("g")
+        .attr("fill", titleColor)
+        .attr("text-anchor", "end")
+        .attr("font-family", "sans-serif")
+        // .attr("font-size", 10)
+        .selectAll("text")
+        .data(I)
+        .join("text")
+        .attr("x", (i) => xScale(X[i]))
+        .attr("y", (i) => yScale(Y[i]) + yScale.bandwidth() / 2)
+        .attr("dy", "0.35em")
+        .attr("dx", -4)
+        .text(title)
+        .call((text) =>
+          text
+            .filter((i) => xScale(X[i]) - xScale(0) < 20)
+            .attr("dx", +4)
+            .attr("fill", titleAltColor)
+            .attr("text-anchor", "start")
+        );
+
+      svg.append("g").attr("transform", `translate(${marginLeft},0)`).call(yAxis);
+
+      return svg.node();
+    }
+
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Line - d3.js</h1>
+    <div class="chart_line"></div>
+
+    <script>
+
+    chart_line = LineChart(data07, {
+      x: (d) => new Date(d.date),
+      y: (d) => d.close,
+      yLabel: "↑ Daily close ($)",
+      color: "steelblue",
+    });
+    document.querySelector(".chart_line").append(chart_line);
+
+    function LineChart(
+      data,
+      {
+        x = ([x]) => x,
+        y = ([, y]) => y,
+        defined,
+        curve = d3.curveLinear,
+        marginTop = 20,
+        marginRight = 30,
+        marginBottom = 30,
+        marginLeft = 40,
+        width = 960,
+        height = 480,
+        xType = d3.scaleUtc,
+        xDomain,
+        xRange = [marginLeft, width - marginRight],
+        yType = d3.scaleLinear,
+        yDomain,
+        yRange = [height - marginBottom, marginTop],
+        yFormat,
+        yLabel,
+        color = "currentColor",
+        strokeLinecap = "round",
+        strokeLinejoin = "round",
+        strokeWidth = 1.5,
+        strokeOpacity = 1,
+        title,
+      } = {}
+    ) {
+      // Compute values.
+      const X = d3.map(data, x);
+      const Y = d3.map(data, y);
+      const O = d3.map(data, d => d);
+      const I = d3.map(data, (_, i) => i);
+
+      // Compute which data points are considered defined.
+      if (defined === undefined) defined = (d, i) => !isNaN(X[i]) && !isNaN(Y[i]);
+      const D = d3.map(data, defined);
+
+      // Compute default domains.
+      if (xDomain === undefined) xDomain = d3.extent(X);
+      if (yDomain === undefined) yDomain = [0, d3.max(Y)];
+
+      // Construct scales and axes.
+      const xScale = xType(xDomain, xRange);
+      const yScale = yType(yDomain, yRange);
+      const xAxis = d3.axisBottom(xScale).ticks(width / 80).tickSizeOuter(0);
+      const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);
+
+      // Compute titles.
+      if (title === undefined) {
+        const formatDate = xScale.tickFormat(null, "%b %-d, %Y");
+        const formatValue = yScale.tickFormat(100, yFormat);
+        title = i => `${formatDate(X[i])}\n${formatValue(Y[i])}`;
+      } else {
+        const O = d3.map(data, d => d);
+        const T = title;
+        title = i => T(O[i], i, data);
+      }
+
+      // Construct a line generator.
+      const line = d3.line()
+          .defined(i => D[i])
+          .curve(curve)
+          .x(i => xScale(X[i]))
+          .y(i => yScale(Y[i]));
+
+      const svg = d3.create("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("viewBox", [0, 0, width, height])
+          .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
+          .attr("font-family", "sans-serif")
+          .attr("font-size", 10)
+          .style("-webkit-tap-highlight-color", "transparent")
+          .style("overflow", "visible")
+          .on("pointerenter pointermove", pointermoved)
+          .on("pointerleave", pointerleft)
+          .on("touchstart", event => event.preventDefault());
+
+      svg.append("g")
+          .attr("transform", `translate(0,${height - marginBottom})`)
+          .call(xAxis);
+
+      svg.append("g")
+          .attr("transform", `translate(${marginLeft},0)`)
+          .call(yAxis)
+          .call(g => g.select(".domain").remove())
+          .call(g => g.selectAll(".tick line").clone()
+              .attr("x2", width - marginLeft - marginRight)
+              .attr("stroke-opacity", 0.1))
+          .call(g => g.append("text")
+              .attr("x", -marginLeft)
+              .attr("y", 10)
+              .attr("fill", "currentColor")
+              .attr("text-anchor", "start")
+              .text(yLabel));
+
+      svg.append("path")
+          .attr("fill", "none")
+          .attr("stroke", color)
+          .attr("stroke-width", strokeWidth)
+          .attr("stroke-linejoin", strokeLinejoin)
+          .attr("stroke-linecap", strokeLinecap)
+          .attr("d", line(I));
+
+      const tooltip = svg.append("g")
+          .style("pointer-events", "none");
+
+      function pointermoved(event) {
+        const i = d3.bisectCenter(X, xScale.invert(d3.pointer(event)[0]));
+        tooltip.style("display", null);
+        tooltip.attr("transform", `translate(${xScale(X[i])},${yScale(Y[i])})`);
+
+        const path = tooltip.selectAll("path")
+          .data([,])
+          .join("path")
+            .attr("fill", "white")
+            .attr("stroke", "black");
+
+        const text = tooltip.selectAll("text")
+          .data([,])
+          .join("text")
+          .call(text => text
+            .selectAll("tspan")
+            .data(`${title(i)}`.split(/\n/))
+            .join("tspan")
+              .attr("x", 0)
+              .attr("y", (_, i) => `${i * 1.1}em`)
+              .attr("font-weight", (_, i) => i ? null : "bold")
+              .text(d => d));
+
+        const {x, y, width: w, height: h} = text.node().getBBox();
+        text.attr("transform", `translate(${-w / 2},${15 - y})`);
+        path.attr("d", `M${-w / 2 - 10},5H-5l5,-5l5,5H${w / 2 + 10}v${h + 20}h-${w + 20}z`);
+        svg.property("value", O[i]).dispatch("input", {bubbles: true});
+      }
+
+      function pointerleft() {
+        tooltip.style("display", "none");
+        svg.node().value = null;
+        svg.dispatch("input", {bubbles: true});
+      }
+
+      return Object.assign(svg.node(), {value: null});
+    }
+
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Bar + Line - d3.js</h1>
+    <div class="chart_barline"></div>
+
+    <script>
+    
+    chart_barline = BarLine();
+    document.querySelector('.chart_barline').append(chart_barline);
+    function BarLine() {
+
+      const width = 960;
+      const height = 480;
+      const margin = {top: 20, right: 30, bottom: 30, left: 40};
+
+      const line = d3.line()
+        .x(d => x(d.year) + x.bandwidth() / 2)
+        .y(d => y2(d.efficiency));
+
+      const x = d3.scaleBand()
+        .domain(data05.map(d => d.year))
+        .rangeRound([margin.left, width - margin.right])
+        .padding(0.1);
+
+      const y1 = d3.scaleLinear()
+        .domain([0, d3.max(data05, d => d.sales)])
+        .rangeRound([height - margin.bottom, margin.top]);
+
+      const y2 = d3.scaleLinear()
+        .domain(d3.extent(data05, d => d.efficiency))
+        .rangeRound([height - margin.bottom, margin.top]);
+
+      const xAxis = g => g
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x)
+            .tickValues(d3.ticks(...d3.extent(x.domain()), width / 40).filter(v => x(v) !== undefined))
+            .tickSizeOuter(0));
+
+      const y1Axis = g => g
+        .attr("transform", `translate(${margin.left},0)`)
+        .style("color", "steelblue")
+        .call(d3.axisLeft(y1).ticks(null, "s"))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.append("text")
+            .attr("x", -margin.left)
+            .attr("y", 10)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .text(data05.y1));
+
+      const y2Axis = g => g
+        .attr("transform", `translate(${width - margin.right},0)`)
+        .call(d3.axisRight(y2))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.append("text")
+            .attr("x", margin.right)
+            .attr("y", 10)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "end")
+            .text(data05.y2))
+
+      const svg = d3.create("svg")
+        .attr("viewBox", [0, 0, width, height]);
+
+      svg.append("g")
+          .attr("fill", "steelblue")
+          .attr("fill-opacity", 0.8)
+        .selectAll("rect")
+        .data(data05)
+        .join("rect")
+          .attr("x", d => x(d.year))
+          .attr("width", x.bandwidth())
+          .attr("y", d => y1(d.sales))
+          .attr("height", d => y1(0) - y1(d.sales));
+
+      svg.append("path")
+          .attr("fill", "none")
+          .attr("stroke", "currentColor")
+          .attr("stroke-miterlimit", 1)
+          .attr("stroke-width", 3)
+          .attr("d", line(data05));
+
+      svg.append("g")
+          .attr("fill", "none")
+          .attr("pointer-events", "all")
+        .selectAll("rect")
+        .data(data05)
+        .join("rect")
+          .attr("x", d => x(d.year))
+          .attr("width", x.bandwidth())
+          .attr("y", 0)
+          .attr("height", height)
+        .append("title")
+          .text(d => `${d.year} ${d.sales.toLocaleString("en")} new cars sold ${d.efficiency.toLocaleString("en")} mpg average fuel efficiency`);
+
+      svg.append("g")
+          .call(xAxis);
+
+      svg.append("g")
+          .call(y1Axis);
+
+      svg.append("g")
+          .call(y2Axis);
+
+      return svg.node();
+    }
+
+    </script>
+    
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Tree - d3.js</h1>
+    <div class="chart_tree""></div>
+
+    <script>
+
+    chart_tree = Tree(data01, {
+      label: (d) => {
+        return d.name;
+      },
+      title: (d, n) => {
+        return `${n
+          .ancestors()
+          .reverse()
+          .map((d) => d.data.name)
+          .join(".")}`;
+      },
+      link: (d, n) => {
+        return `https://github.com/prefuse/Flare/${
+          n.children ? "tree" : "blob"
+        }/master/flare/src/${n
+          .ancestors()
+          .reverse()
+          .map((d) => d.data.name)
+          .join("/")}${n.children ? "" : ".as"}`;
+      },
+      sort: (a, b) => d3.descending(a.height, b.height),
+      tree: d3.cluster,
+    });
+
+    document.querySelector(".chart_tree").append(chart_tree);
+
+    function Tree(
+      data,
+      {
+        path,
+        id = Array.isArray(data) ? (d) => d.id : null,
+        parentId = Array.isArray(data) ? (d) => d.parentId : null,
+        children,
+        tree = d3.tree,
+        sort,
+        label,
+        title,
+        link,
+        linkTarget = "_blank",
+        width = 960,
+        height,
+        r = 3,
+        padding = 1,
+        fill = "#999",
+        fillOpacity,
+        stroke = "#555",
+        strokeWidth = 1.5,
+        strokeOpacity = 0.4,
+        strokeLinejoin,
+        strokeLinecap,
+        halo = "#fff",
+        haloWidth = 3,
+      } = {}
+    ) {
+      const root =
+        path != null
+          ? d3.stratify().path(path)(data)
+          : id != null || parentId != null
+          ? d3.stratify().id(id).parentId(parentId)(data)
+          : d3.hierarchy(data, children);
+
+      if (sort != null) root.sort(sort);
+
+      const descendants = root.descendants();
+      const L = label == null ? null : descendants.map((d) => label(d.data, d));
+
+      const dx = 10;
+      const dy = width / (root.height + padding);
+      tree().nodeSize([dx, dy])(root);
+
+      let x0 = Infinity;
+      let x1 = -x0;
+      root.each((d) => {
+        if (d.x > x1) x1 = d.x;
+        if (d.x < x0) x0 = d.x;
+      });
+
+      if (height === undefined) height = x1 - x0 + dx * 2;
+
+      const svg = d3
+        .create("svg")
+        .attr("viewBox", [(-dy * padding) / 2, x0 - dx, width, height])
+        .attr("width", width)
+        .attr("height", height)
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10);
+
+      svg
+        .append("g")
+        .attr("fill", "none")
+        .attr("stroke", stroke)
+        .attr("stroke-opacity", strokeOpacity)
+        .attr("stroke-linecap", strokeLinecap)
+        .attr("stroke-linejoin", strokeLinejoin)
+        .attr("stroke-width", strokeWidth)
+        .selectAll("path")
+        .data(root.links())
+        .join("path")
+
+        .attr(
+          "d",
+          d3
+            .linkHorizontal()
+            .x((d) => d.y)
+            .y((d) => d.x)
+        );
+
+      const node = svg
+        .append("g")
+        .selectAll("a")
+        .data(root.descendants())
+        .join("a")
+
+        .attr("xlink:href", link == null ? null : (d) => link(d.data, d))
+        .attr("target", link == null ? null : linkTarget)
+        .attr("transform", (d) => `translate(${d.y},${d.x})`);
+
+      node
+        .append("circle")
+        .attr("fill", (d) => (d.children ? stroke : fill))
+        .attr("r", r);
+
+      if (title != null) node.append("title").text((d) => title(d.data, d));
+
+      if (L)
+        node
+          .append("text")
+          .attr("dy", "0.32em")
+          .attr("x", (d) => (d.children ? -6 : 6))
+          .attr("text-anchor", (d) => (d.children ? "end" : "start"))
+          .attr("paint-order", "stroke")
+          .attr("stroke", halo)
+          .attr("stroke-width", haloWidth)
+          .text((d, i) => L[i]);
+
+      return svg.node();
+    }
+
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Treemap - d3.js</h1>
+    <div class="chart_treemap"></div>
+
+    <script>
+    
+    chart_treemap = Treemap(data01, {
+      value: (d) => {
+        console.log('d', d);
+        return d.size;
+      },
+      group: (d, n) => n.ancestors().slice(-2)[0].data.name,
+      label: (d, n) =>
+        [...d.name.split(/(?=[A-Z][a-z])/g), n.value.toLocaleString("en")].join(
+          "\n"
+        ),
+      title: (d, n) =>
+        `${n
+          .ancestors()
+          .reverse()
+          .map((d) => d.data.name)
+          .join(".")}\n${n.value.toLocaleString("en")}`,
+      link: (d, n) =>
+        `https://github.com/prefuse/Flare/blob/master/flare/src/${n
+          .ancestors()
+          .reverse()
+          .map((d) => d.data.name)
+          .join("/")}.as`,
+    });
+
+    document.querySelector(".chart_treemap").append(chart_treemap);
+
+    function Treemap(
+      data,
+      {
+        path,
+        id = Array.isArray(data) ? (d) => d.id : null,
+        parentId = Array.isArray(data) ? (d) => d.parentId : null,
+        children,
+        value,
+        sort = (a, b) => d3.descending(a.value, b.value),
+        label,
+        group,
+        title,
+        link,
+        linkTarget = "_blank",
+        tile = d3.treemapBinary,
+        width = 960,
+        height = 960,
+        margin = 0,
+        marginTop = margin,
+        marginRight = margin,
+        marginBottom = margin,
+        marginLeft = margin,
+        padding = 1,
+        paddingInner = padding,
+        paddingOuter = padding,
+        paddingTop = paddingOuter,
+        paddingRight = paddingOuter,
+        paddingBottom = paddingOuter,
+        paddingLeft = paddingOuter,
+        round = true,
+        colors = d3.schemeTableau10,
+        zDomain,
+        fill = "#ccc",
+        fillOpacity = group == null ? null : 0.6,
+        stroke,
+        strokeWidth,
+        strokeOpacity,
+        strokeLinejoin,
+      } = {}
+    ) {
+      const root = d3
+        .hierarchy(data, children)
+        .sum(function (d) {
+          return d.value;
+        })
+        .sort(function (a, b) {
+          // console.log(a, b);
+          return b.height - a.height || b.value - a.value;
+        });
+
+      const leaves = root.leaves();
+      const G = group == null ? null : leaves.map((d) => group(d.data, d));
+      if (zDomain === undefined) zDomain = G;
+      zDomain = new d3.InternSet(zDomain);
+      const color = group == null ? null : d3.scaleOrdinal(zDomain, colors);
+
+      const L = label == null ? null : leaves.map((d) => label(d.data, d));
+      const T =
+        title === undefined
+          ? L
+          : title == null
+          ? null
+          : leaves.map((d) => title(d.data, d));
+
+      if (sort != null) root.sort(sort);
+
+      d3
+        .treemap()
+        .tile(tile)
+        .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
+        .paddingInner(paddingInner)
+        .paddingTop(paddingTop)
+        .paddingRight(paddingRight)
+        .paddingBottom(paddingBottom)
+        .paddingLeft(paddingLeft)
+        .round(round)(root);
+
+      const svg = d3
+        .create("svg")
+        .attr("viewBox", [-marginLeft, -marginTop, width, height])
+        .attr("width", width)
+        .attr("height", height)
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10);
+
+      const node = svg
+        .selectAll("a")
+        .data(leaves)
+        .join("a")
+        .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
+        .attr("target", link == null ? null : linkTarget)
+        .attr("transform", (d) => `translate(${d.x0},${d.y0})`);
+
+      node
+        .append("rect")
+        .attr("fill", color ? (d, i) => color(G[i]) : fill)
+        .attr("fill-opacity", fillOpacity)
+        .attr("stroke", stroke)
+        .attr("stroke-width", strokeWidth)
+        .attr("stroke-opacity", strokeOpacity)
+        .attr("stroke-linejoin", strokeLinejoin)
+        .attr("width", (d) => d.x1 - d.x0)
+        .attr("height", (d) => d.y1 - d.y0);
+
+      if (T) {
+        node.append("title").text((d, i) => T[i]);
+      }
+
+      if (L) {
+        const uid = `O-${Math.random().toString(16).slice(2)}`;
+
+        node
+          .append("clipPath")
+          .attr("id", (d, i) => `${uid}-clip-${i}`)
+          .append("rect")
+          .attr("width", (d) => d.x1 - d.x0)
+          .attr("height", (d) => d.y1 - d.y0);
+
+        node
+          .append("text")
+          .attr(
+            "clip-path",
+            (d, i) => `url(${new URL(`#${uid}-clip-${i}`, location)})`
+          )
+          .selectAll("tspan")
+          .data((d, i) => `${L[i]}`.split(/\n/g))
+          .join("tspan")
+          .attr("x", 3)
+          .attr("y", (d, i, D) => `${(i === D.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+          .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
+          .text((d) => d);
+      }
+
+      return Object.assign(svg.node(), { scales: { color } });
+    }
+
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Forcedirect - d3.js</h1>
+    <div class="chart_forcedirect"></div>
+
+    <script>
+    
+    chart_forcedirect = ForceGraph(data02, {
+      nodeId: (d) => d.id,
+      nodeGroup: (d) => d.group,
+      nodeTitle: (d) => `${d.id}\n${d.group}`,
+      linkStrokeWidth: (l) => Math.sqrt(l.value),
+    });
+
+    document.querySelector(".chart_forcedirect").append(chart_forcedirect);
+
+    function ForceGraph(
+      { nodes, links },
+      {
+        nodeId = (d) => d.id,
+        nodeGroup,
+        nodeGroups,
+        nodeTitle,
+        nodeFill = "currentColor",
+        nodeStroke = "#fff",
+        nodeStrokeWidth = 1.5,
+        nodeStrokeOpacity = 1,
+        nodeRadius = 5,
+        nodeStrength,
+        linkSource = ({ source }) => source,
+        linkTarget = ({ target }) => target,
+        linkStroke = "#999",
+        linkStrokeOpacity = 0.6,
+        linkStrokeWidth = 1.5,
+        linkStrokeLinecap = "round",
+        linkStrength,
+        colors = d3.schemeTableau10,
+        width = 960,
+        height = 960,
+        invalidation,
+      } = {}
+    ) {
+      const N = d3.map(nodes, nodeId).map(intern);
+      const LS = d3.map(links, linkSource).map(intern);
+      const LT = d3.map(links, linkTarget).map(intern);
+      if (nodeTitle === undefined) nodeTitle = (_, i) => N[i];
+      const T = nodeTitle == null ? null : d3.map(nodes, nodeTitle);
+      const G = nodeGroup == null ? null : d3.map(nodes, nodeGroup).map(intern);
+      const W =
+        typeof linkStrokeWidth !== "function"
+          ? null
+          : d3.map(links, linkStrokeWidth);
+      const L = typeof linkStroke !== "function" ? null : d3.map(links, linkStroke);
+
+      nodes = d3.map(nodes, (_, i) => ({ id: N[i] }));
+      links = d3.map(links, (_, i) => ({ source: LS[i], target: LT[i] }));
+
+      if (G && nodeGroups === undefined) nodeGroups = d3.sort(G);
+
+      const color = nodeGroup == null ? null : d3.scaleOrdinal(nodeGroups, colors);
+
+      const forceNode = d3.forceManyBody();
+      const forceLink = d3.forceLink(links).id(({ index: i }) => N[i]);
+      if (nodeStrength !== undefined) forceNode.strength(nodeStrength);
+      if (linkStrength !== undefined) forceLink.strength(linkStrength);
+
+      const simulation = d3
+        .forceSimulation(nodes)
+        .force("link", forceLink)
+        .force("charge", forceNode)
+        .force("center", d3.forceCenter())
+        .on("tick", ticked);
+
+      const svg = d3
+        .create("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [-width / 2, -height / 2, width, height])
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+      const link = svg
+        .append("g")
+        .attr("stroke", typeof linkStroke !== "function" ? linkStroke : null)
+        .attr("stroke-opacity", linkStrokeOpacity)
+        .attr(
+          "stroke-width",
+          typeof linkStrokeWidth !== "function" ? linkStrokeWidth : null
+        )
+        .attr("stroke-linecap", linkStrokeLinecap)
+        .selectAll("line")
+        .data(links)
+        .join("line");
+
+      const node = svg
+        .append("g")
+        .attr("fill", nodeFill)
+        .attr("stroke", nodeStroke)
+        .attr("stroke-opacity", nodeStrokeOpacity)
+        .attr("stroke-width", nodeStrokeWidth)
+        .selectAll("circle")
+        .data(nodes)
+        .join("circle")
+        .attr("r", nodeRadius)
+        .call(drag(simulation));
+
+      if (W) link.attr("stroke-width", ({ index: i }) => W[i]);
+      if (L) link.attr("stroke", ({ index: i }) => L[i]);
+      if (G) node.attr("fill", ({ index: i }) => color(G[i]));
+      if (T) node.append("title").text(({ index: i }) => T[i]);
+      if (invalidation != null) invalidation.then(() => simulation.stop());
+
+      function intern(value) {
+        return value !== null && typeof value === "object"
+          ? value.valueOf()
+          : value;
+      }
+
+      function ticked() {
+        link
+          .attr("x1", (d) => d.source.x)
+          .attr("y1", (d) => d.source.y)
+          .attr("x2", (d) => d.target.x)
+          .attr("y2", (d) => d.target.y);
+
+        node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+      }
+
+      function drag(simulation) {
+        function dragstarted(event) {
+          if (!event.active) simulation.alphaTarget(0.3).restart();
+          event.subject.fx = event.subject.x;
+          event.subject.fy = event.subject.y;
+        }
+
+        function dragged(event) {
+          event.subject.fx = event.x;
+          event.subject.fy = event.y;
+        }
+
+        function dragended(event) {
+          if (!event.active) simulation.alphaTarget(0);
+          event.subject.fx = null;
+          event.subject.fy = null;
+        }
+
+        return d3
+          .drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended);
+      }
+
+      return Object.assign(svg.node(), { scales: { color } });
+    }
+
+
+    </script>
+
+    <h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">Bubblemap - d3.js + topo.js</h1>
+    <div class="chart_bubblemap"></div>
+
+    <script>
+
+    const centroid = (feature) => d3.geoPath().centroid(feature);
+    const nation = topojson.feature(data04, data04.objects.nation);
+    const statemap = new Map(topojson.feature(data04, data04.objects.states).features.map(d => [d.id, d]));
+    const countymap = new Map(topojson.feature(data04, data04.objects.counties).features.map(d => [d.id, d]));
+    const statemesh = topojson.mesh(data04, data04.objects.states, (a, b) => a !== b);
+
+    chart_bubblemap = BubbleMap(data03, {
+      value: ([data03]) => +data03,
+      position([, stateid, countyid]) {
+        const county = countymap.get(stateid + countyid);
+        return county && centroid(county);
+      },
+      title([data03, stateid, countyid]) {
+        const state = statemap.get(stateid);
+        const county = countymap.get(stateid + countyid);
+        return `${county?.properties.name}, ${state?.properties.name}\n${(+data03).toLocaleString("en")}`;
+      },
+      features: nation,
+      borders: statemesh,
+    })
+
+    document.querySelector('.chart_bubblemap').append(chart_bubblemap);
+
+    function BubbleMap(data, {
+      position = d => d, 
+      value = () => undefined, 
+      title, 
+      scale = d3.scaleSqrt, 
+      domain, 
+      maxRadius = 40, 
+      width = 960, 
+      height = 960, 
+      projection, 
+      features, 
+      borders, 
+      outline = projection && projection.rotate ? {type: "Sphere"} : null, 
+      backgroundFill = "#e0e0e0", 
+      backgroundStroke = "white", 
+      backgroundStrokeWidth, 
+      backgroundStrokeOpacity, 
+      backgroundStrokeLinecap = "round", 
+      backgroundStrokeLinejoin = "round", 
+      fill = "brown", 
+      fillOpacity = 0.5, 
+      stroke = "white", 
+      strokeWidth = 0.5, 
+      strokeOpacity, 
+      legendX = width - maxRadius - 10,
+      legendY = height - 10,
+    } = {}) {
+      
+      const I = d3.map(data, (_, i) => i);
+      const V = d3.map(data, value).map(d => d == null ? NaN : +d);
+      const P = d3.map(data, position);
+      const T = title == null ? null : d3.map(data, title);
+      
+      if (domain === undefined) domain = [0, d3.max(V)];
+      
+      const radius = scale(domain, [0, maxRadius]);
+      
+      if (height === undefined) {
+        if (outline === undefined) {
+          height = 400;
+        } else {
+          const [[x0, y0], [x1, y1]] = d3.geoPath(projection.fitWidth(width, outline)).bounds(outline);
+          const dy = Math.ceil(y1 - y0), l = Math.min(Math.ceil(x1 - x0), dy);
+          projection.scale(projection.scale() * (l - 1) / l).precision(0.2);
+          height = dy;
+        }
+      }
+      
+      const path = d3.geoPath(projection);
+
+      const svg = d3.create("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("viewBox", [0, 0, width, height])
+          .attr("style", "width: 100%; height: auto; height: intrinsic;");
+
+      if (outline != null) svg.append("path")
+          .attr("fill", "white")
+          .attr("stroke", "currentColor")
+          .attr("d", path(outline));
+
+      svg.append("path")
+          .datum(features)
+          .attr("fill", backgroundFill)
+          .attr("d", path);
+
+      if (borders != null) svg.append("path")
+          .attr("pointer-events", "none")
+          .attr("fill", "none")
+          .attr("stroke", backgroundStroke)
+          .attr("stroke-linecap", backgroundStrokeLinecap)
+          .attr("stroke-linejoin", backgroundStrokeLinejoin)
+          .attr("stroke-width", backgroundStrokeWidth)
+          .attr("stroke-opacity", backgroundStrokeOpacity)
+          .attr("d", path(borders));
+
+      const legend = svg.append("g")
+          .attr("fill", "#777")
+          .attr("transform", `translate(${legendX},${legendY})`)
+          .attr("text-anchor", "middle")
+          .style("font", "10px sans-serif")
+        .selectAll("g")
+          .data(radius.ticks(4).slice(1))
+        .join("g");
+
+      legend.append("circle")
+          .attr("fill", "none")
+          .attr("stroke", "#ccc")
+          .attr("cy", d => -radius(d))
+          .attr("r", radius);
+
+      legend.append("text")
+          .attr("y", d => -2 * radius(d))
+          .attr("dy", "1.3em")
+          .text(radius.tickFormat(4, "s"));
+
+      svg.append("g")
+          .attr("fill", fill)
+          .attr("fill-opacity", fillOpacity)
+          .attr("stroke", stroke)
+          .attr("stroke-width", strokeWidth)
+          .attr("stroke-opacity", strokeOpacity)
+        .selectAll("circle")
+        .data(d3.range(data.length)
+            .filter(i => P[i])
+            .sort((i, j) => d3.descending(V[i], V[j])))
+        .join("circle")
+          .attr("transform", projection == null
+              ? i => `translate(${P[i]})`
+              : i => `translate(${projection(P[i])})`)
+          .attr("r", i => radius(V[i]))
+          .call(T ? circle => circle.append("title").text(i => T[i]) : () => {});
+
+      return Object.assign(svg.node(), {scales: {radius}});
+    }
+
+    </script>
+
+<h1 style="font-size:32px; line-height:40px; font-weight:bold; display:block; padding:320px 0 32px 0;">southkorea - d3.js + topo.js</h1>
+<div class="chart_sk"></div>
+
+<script>
+
+skMap({
+  dom: '.chart_sk',
+  data: sk_m, 
+  dataPosition: 'skorea-municipalities-geo', 
+  width: 960, 
+  height: 960,
+  scaleRatio: 0.88
+});
+
+function skMap({dom, data, dataPosition, width, height, scaleRatio}) {
+
+  var feature     = topojson.feature(data, data.objects[dataPosition]);
+  var offset      = [width / 2, (height / 2) - (height / 2) * (1 - scaleRatio)];
+  var center      = d3.geoPath().centroid(feature);
+  var svg         = d3.select(dom).append("svg").attr("width", width).attr("height", height);
+  var projection  = d3.geoMercator().scale(1).center(center).translate(offset);
+  var path        = d3.geoPath().projection(projection);
+  var b           = path.bounds(feature);
+  var scale       = Math.min(width / (b[1][0] - b[0][0]), height / (b[1][1] - b[0][1]));
+
+  projection.scale(scale * scaleRatio);
+  path = d3.geoPath().projection(projection);
+
+  var cities = svg.append('g')
+    .selectAll(".city")
+    .data(feature.features)
+    .join("path")
+    .attr("class", d => `subunit ${d.properties.ID_2}`)
+    .attr("d", path);
+
+}
+
+</script>
+
+    
+  </div>
+</body>
+</html>
